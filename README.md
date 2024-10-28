@@ -2,6 +2,8 @@
 
 A React component for visualizing data on a map of Ukraine by oblast. This package makes it easy to present regional data visually, providing a choropleth map representation of Ukrainian oblasts (regions).
 
+<img src="./docs/images/screenshot.png" width="500px" alt="Component Screenshot">
+
 ## Features
 - Display a map of Ukraine with individual oblasts colored based on provided data.
 - Supports tooltip interactions to display additional information about each oblast.
