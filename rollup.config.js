@@ -21,7 +21,11 @@ module.exports = {
   ],
   plugins: [
     peerDepsExternal(),
-    resolve(),
+    resolve({
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      exportConditions: ['node', 'browser'],
+      dedupe: ['react', 'react-dom'], // Deduplicate React to ensure there's only one instance
+    }),
     commonjs(),
     json(), // Add the JSON plugin here
     typescript({ useTsconfigDeclarationDir: true }),
