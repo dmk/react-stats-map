@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@dkkoval/react-ua-map": "file:../dkkoval-react-ua-map-0.1.2.tgz",
+    "@dkkoval/react-ua-map": "0.1.4",
+    "@monaco-editor/react": "^4.6.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -42,6 +43,10 @@
     ]
   },
   "devDependencies": {
-    "@types/topojson-client": "^3.1.5"
+    "@tailwindcss/forms": "^0.5.9",
+    "@types/topojson-client": "^3.1.5",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
   }
 }

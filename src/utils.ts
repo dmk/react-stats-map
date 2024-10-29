@@ -6,7 +6,7 @@ export function getOblastCode(oblastName: string): OblastCode | undefined {
     'CK': ['черкаська', 'cherkasy'],
     'CH': ['чернігівська', 'chernihiv'],
     'CV': ['чернівецька', 'chernivtsi'],
-    'KR': ['крим', 'crimea'],
+    'KR': ['автономна республіка крим', 'крим', 'crimea'],
     'DP': ['дніпропетровська', 'dnipropetrovsk'],
     'DT': ['донецька', 'donetsk'],
     'IF': ['івано-франківська', 'ivano-frankivsk'],

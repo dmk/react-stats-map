@@ -1,38 +1,78 @@
-import React, { useEffect, useMemo } from 'react';
-import { geoPath, geoMercator } from '@visx/vendor/d3-geo';
-import * as topojson from 'topojson-client';
-import topology from '../assets/maps/ua-adm1.json';
+import React, { useMemo } from 'react';
+
 import { motion } from 'framer-motion';
-import { TooltipWithBounds, useTooltip } from '@visx/tooltip';
+
+import * as topojson from 'topojson-client';
+
 import { scaleThreshold } from '@visx/scale';
-import { LegendItem, LegendLabel, LegendThreshold } from '@visx/legend';
-import { OblastCode, UAMapProps } from '../types';
+import { TooltipWithBounds, useTooltip } from '@visx/tooltip';
+import { geoMercator, geoPath } from '@visx/vendor/d3-geo';
+
+import UAMapLegend from './UAMapLegend';
+import UAMapTitle from './UAMapTitle';
+import { OblastCode } from '@/types';
+
+import topology from '../assets/maps/ua-adm1.json';
 
 const { features } = topojson.feature(
   topology,
   topology.objects.ukraine
 ) as topojson.FeatureCollection;
 
-export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
-  const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } =
-    useTooltip();
+export interface MapStyle {
+  padding?: number;
+  borderColor?: string;
+  defaultFillColor?: string;
+}
 
-  // Allocate space for title and legend
-  const titleHeight = height * 0.1;
-  const legendHeight = height * 0.1;
+export interface UAMapProps {
+  width: number;
+  height: number;
+  data: Record<OblastCode, number>;
+  valueName: string;
+  title: string;
+  hideLegend?: boolean;
+  hideTitle?: boolean;
+  mapStyle?: MapStyle;
+}
+
+export function UAMap({
+  width,
+  height,
+  data,
+  valueName,
+  title,
+  hideTitle = false,
+  hideLegend = false,
+  mapStyle = {},
+}: UAMapProps) {
+  const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } = useTooltip();
+
+  const {
+    padding = 10,
+    borderColor = '#ebf4f3',
+    defaultFillColor = '#cbd5e1',
+  } = mapStyle;
+
+  // Adjust heights based on whether Title and Legend are hidden
+  const titleHeight = hideTitle ? 0 : height * 0.1;
+  const legendHeight = hideLegend ? 0 : height * 0.1;
   const mapHeight = height - titleHeight - legendHeight;
 
-  const centerX = width / 2;
-  const centerY = mapHeight / 2;
-
-  // Create a projection for Ukraine using fitSize
+  // Create a projection for Ukraine using fitExtent
   const projection = useMemo(() => {
-    const proj = geoMercator().fitSize(
-      [width, mapHeight],
-      { type: 'FeatureCollection', features }
+    const proj = geoMercator().fitExtent(
+      [
+        [padding, padding],
+        [width - padding, mapHeight - padding],
+      ],
+      {
+        type: 'FeatureCollection',
+        features,
+      }
     );
     return proj;
-  }, [width, mapHeight]);
+  }, [width, mapHeight, padding]); // Added padding to dependencies
 
   // Create a path generator using the projection
   const pathGenerator = useMemo(() => geoPath().projection(projection), [
@@ -61,7 +101,7 @@ export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
     [pathGenerator]
   );
 
-  if (width < 420) return null;
+  if (width < 300) return null;
 
   return (
     <>
@@ -74,21 +114,9 @@ export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
         }}
       >
         {/* Map Title */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: width,
-            height: titleHeight,
-            textAlign: 'center',
-            fontSize: '1.25rem',
-            fontWeight: 'bold',
-            lineHeight: `${titleHeight}px`,
-          }}
-        >
-          {title}
-        </div>
+        {!hideTitle && (
+          <UAMapTitle width={width} height={titleHeight} title={title} />
+        )}
 
         {/* Map Container */}
         <div
@@ -110,8 +138,8 @@ export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
                 <React.Fragment key={`map-feature-${i}`}>
                   <motion.path
                     d={paths[i] || ''}
-                    fill={colorScale(value) || '#cbd5e1'}
-                    stroke="#EBF4F3"
+                    fill={colorScale(value) || defaultFillColor}
+                    stroke={borderColor}
                     strokeWidth={1}
                     whileHover={{
                       strokeWidth: 2,
@@ -135,10 +163,21 @@ export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
                             }}
                           >
                             <svg width={16} height={16}>
-                              <circle fill={colorScale(value) || '#cbd5e1'} r={8} cx={8} cy={8} />
+                              <circle
+                                fill={colorScale(value) || defaultFillColor}
+                                r={8}
+                                cx={8}
+                                cy={8}
+                              />
                             </svg>
                             {name}:&nbsp;
-                            {value ? (<>{value} {valueName}</>) : (<>дані відсутні</>)}
+                            {value ? (
+                              <>
+                                {value} {valueName}
+                              </>
+                            ) : (
+                              <>дані відсутні</>
+                            )}
                           </div>
                         ),
                         tooltipLeft: clientX + 10,
@@ -153,48 +192,14 @@ export function UAMap({ width, height, data, valueName, title }: UAMapProps) {
         </div>
 
         {/* Legend Container */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: width,
-            height: legendHeight,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <LegendThreshold scale={colorScale}>
-            {(labels) => (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: '1.2rem',
-                }}
-              >
-                {labels.reverse().map((label, i) => (
-                  <LegendItem key={`legend-quantile-${i}`}>
-                    <svg width={18} height={18}>
-                      <circle fill={label.value} r={9} cx={9} cy={9} />
-                    </svg>
-                    <LegendLabel
-                      style={{
-                        fontSize: '0.875rem',
-                        marginLeft: '.5rem'
-                      }}
-                    >
-                      {label.text}
-                    </LegendLabel>
-                  </LegendItem>
-                ))}
-              </div>
-            )}
-          </LegendThreshold>
-        </div>
+        {!hideLegend && (
+          <UAMapLegend
+            width={width}
+            height={legendHeight}
+            colorScale={colorScale}
+          />
+        )}
       </div>
-
 
       {tooltipData && (
         <TooltipWithBounds top={tooltipTop} left={tooltipLeft}>
