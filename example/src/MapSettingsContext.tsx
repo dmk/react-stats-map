@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import populationJson from './data/population.json';
-import { OblastCode, getOblastCode } from '@dkkoval/react-ua-map';
+import { OblastCode, getOblastCode, ThresholdColor } from '@dkkoval/react-ua-map';
 
 export interface MapSettings {
   title: string;
@@ -12,6 +12,7 @@ export interface MapSettings {
   defaultFillColor: string;
   data: Record<OblastCode, number>;
   jsonData: string;
+  thresholdColors?: ThresholdColor[];
   setTitle: (title: string) => void;
   setValueName: (valueName: string) => void;
   setPadding: (padding: number) => void;
@@ -21,6 +22,7 @@ export interface MapSettings {
   setDefaultFillColor: (color: string) => void;
   setData: (data: Record<OblastCode, number>) => void;
   setJsonData: (jsonData: string) => void;
+  setThresholdColors?: (thresholdColors: ThresholdColor[]) => void;
 }
 
 const MapSettingsContext = createContext<MapSettings | undefined>(undefined);
@@ -57,6 +59,7 @@ export const MapSettingsProvider = ({ children }: { children: ReactNode }) => {
   const [defaultFillColor, setDefaultFillColor] = useState('#cbd5e1');
   const [data, setData] = useState(transformDataKeys(initialData));
   const [jsonData, setJsonData] = useState(JSON.stringify(initialData, null, 2));
+  const [thresholdColors, setThresholdColors] = useState<ThresholdColor[] | undefined>(undefined);
 
   return (
     <MapSettingsContext.Provider
@@ -70,6 +73,7 @@ export const MapSettingsProvider = ({ children }: { children: ReactNode }) => {
         defaultFillColor,
         data,
         jsonData,
+        thresholdColors,
         setTitle,
         setValueName,
         setPadding,
@@ -79,6 +83,7 @@ export const MapSettingsProvider = ({ children }: { children: ReactNode }) => {
         setDefaultFillColor,
         setData,
         setJsonData,
+        setThresholdColors,
       }}
     >
       {children}

@@ -19,6 +19,11 @@ const { features } = topojson.feature(
   topology.objects.ukraine
 ) as topojson.FeatureCollection;
 
+export type ThresholdColor = {
+  threshold: number;
+  color: string;
+};
+
 export interface MapStyle {
   padding?: number;
   borderColor?: string;
@@ -34,6 +39,7 @@ export interface UAMapProps {
   hideLegend?: boolean;
   hideTitle?: boolean;
   mapStyle?: MapStyle;
+  thresholdColors?: ThresholdColor[];
 }
 
 export function UAMap({
@@ -45,6 +51,7 @@ export function UAMap({
   hideTitle = false,
   hideLegend = false,
   mapStyle = {},
+  thresholdColors,
 }: UAMapProps) {
   const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } = useTooltip();
 
@@ -81,19 +88,34 @@ export function UAMap({
 
   const maxValue = useMemo(() => Math.max(...Object.values(data)), [data]);
 
-  // Create levels automatically
-  const stepSize = maxValue / 5;
-  const thresholdLevels = Array.from(
-    { length: 5 },
-    (_, i) => Math.round((i + 1) * stepSize)
-  );
+  // Default thresholds and colors if the user doesn't provide any
+  const defaultThresholdColors: ThresholdColor[] = useMemo(() => {
+    const stepSize = maxValue / 5;
+    const defaultColors = ['#34d399', '#10b981', '#059669', '#047857', '#065f46'];
 
+    return Array.from({ length: 5 }, (_, i) => ({
+      threshold: Math.round((i + 1) * stepSize),
+      color: defaultColors[i],
+    }));
+  }, [maxValue]);
+
+  const usedThresholdColors = thresholdColors || defaultThresholdColors;
+
+  // Ensure thresholds are sorted in ascending order
+  usedThresholdColors.sort((a, b) => a.threshold - b.threshold);
+
+  // Extract thresholds and colors from the array
+  const usedThresholds = usedThresholdColors.map(tc => tc.threshold);
+  const usedColors = usedThresholdColors.map(tc => tc.color);
+
+  // For scaleThreshold, the number of colors should be one more than the number of thresholds
+  // Include a color for values below the first threshold
   const colorScale = useMemo(
     () =>
       scaleThreshold<number, string>()
-        .domain(thresholdLevels)
-        .range(['#34d399', '#10b981', '#059669', '#047857', '#065f46']),
-    [thresholdLevels]
+        .domain(usedThresholds)
+        .range(usedColors),
+    [usedThresholds, usedColors]
   );
 
   const paths = useMemo(

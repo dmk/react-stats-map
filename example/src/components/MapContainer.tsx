@@ -12,6 +12,7 @@ const MapContainer = () => {
     hideLegend,
     borderColor,
     defaultFillColor,
+    thresholdColors,
     data,
   } = useMapSettings();
 
@@ -31,6 +32,7 @@ const MapContainer = () => {
             }}
             hideTitle={hideTitle}
             hideLegend={hideLegend}
+            thresholdColors={thresholdColors}
           />
         )}
       </ParentSize>
