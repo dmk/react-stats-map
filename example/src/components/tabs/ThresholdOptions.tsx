@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useMapSettings } from '../../MapSettingsContext';
-import { ThresholdColor } from '@dkkoval/react-ua-map';
+import { ThresholdColor } from '@dkkoval/react-stats-map';
 
 const ThresholdOptions = () => {
   const { data, thresholdColors, setThresholdColors } = useMapSettings();

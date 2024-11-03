@@ -2,22 +2,14 @@ import React, { useMemo } from 'react';
 
 import { motion } from 'framer-motion';
 
-import * as topojson from 'topojson-client';
+import { Feature, FeatureCollection } from 'topojson-client';
 
 import { scaleThreshold } from '@visx/scale';
 import { TooltipWithBounds, useTooltip } from '@visx/tooltip';
 import { geoMercator, geoPath } from '@visx/vendor/d3-geo';
 
-import UAMapLegend from './UAMapLegend';
-import UAMapTitle from './UAMapTitle';
-import { OblastCode } from '@/types';
-
-import topology from '../assets/maps/ua-adm1.json';
-
-const { features } = topojson.feature(
-  topology,
-  topology.objects.ukraine
-) as topojson.FeatureCollection;
+import StatsMapLegend from './StatsMapLegend';
+import StatsMapTitle from './StatsMapTitle';
 
 export type ThresholdColor = {
   threshold: number;
@@ -30,29 +22,35 @@ export interface MapStyle {
   defaultFillColor?: string;
 }
 
-export interface UAMapProps {
+export interface StatsMapProps {
+  topojsonFeatures: FeatureCollection;
   width: number;
   height: number;
-  data: Record<OblastCode, number>;
+  data: Record<string, number>;
   valueName: string;
   title: string;
   hideLegend?: boolean;
   hideTitle?: boolean;
   mapStyle?: MapStyle;
   thresholdColors?: ThresholdColor[];
+  nameAccessor: (feature: Feature) => string;
+  codeAccessor: (feature: Feature) => string;
 }
 
-export function UAMap({
+export function StatsMap({
+  topojsonFeatures,
   width,
   height,
   data,
   valueName,
   title,
+  nameAccessor = (feature: Feature): string => feature.properties.name,
+  codeAccessor = (feature: Feature): string => feature.properties.code,
   hideTitle = false,
   hideLegend = false,
   mapStyle = {},
   thresholdColors,
-}: UAMapProps) {
+}: StatsMapProps) {
   const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } = useTooltip();
 
   const {
@@ -75,7 +73,7 @@ export function UAMap({
       ],
       {
         type: 'FeatureCollection',
-        features,
+        features: topojsonFeatures,
       }
     );
     return proj;
@@ -119,7 +117,7 @@ export function UAMap({
   );
 
   const paths = useMemo(
-    () => features.map((feature) => pathGenerator(feature)),
+    () => topojsonFeatures.map((feature) => pathGenerator(feature)),
     [pathGenerator]
   );
 
@@ -137,7 +135,7 @@ export function UAMap({
       >
         {/* Map Title */}
         {!hideTitle && (
-          <UAMapTitle width={width} height={titleHeight} title={title} />
+          <StatsMapTitle width={width} height={titleHeight} title={title} />
         )}
 
         {/* Map Container */}
@@ -151,9 +149,9 @@ export function UAMap({
           }}
         >
           <svg width={width} height={mapHeight}>
-            {features.map((feature, i) => {
-              const name = feature.properties.name;
-              const code: OblastCode = feature.properties.code;
+            {topojsonFeatures.map((feature, i) => {
+              const name = nameAccessor(feature);
+              const code: string = codeAccessor(feature);
               const value = data[code];
 
               return (
@@ -215,7 +213,7 @@ export function UAMap({
 
         {/* Legend Container */}
         {!hideLegend && (
-          <UAMapLegend
+          <StatsMapLegend
             width={width}
             height={legendHeight}
             colorScale={colorScale}

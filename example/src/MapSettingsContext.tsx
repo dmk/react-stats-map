@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import populationJson from './data/population.json';
-import { OblastCode, getOblastCode, ThresholdColor } from '@dkkoval/react-ua-map';
+import { OblastCode, getOblastCode } from '@dkkoval/react-ua-map';
+import { ThresholdColor } from '@dkkoval/react-stats-map';
 
 export interface MapSettings {
   title: string;
