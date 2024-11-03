@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-ua-map",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A React component for visualizing data on a map of Ukraine by oblast.",
   "publishConfig": {
     "access": "public"
@@ -38,11 +38,6 @@
   "homepage": "https://github.com/dmk/react-ua-map#readme",
   "dependencies": {
     "@dkkoval/react-stats-map": "0.1.0",
-    "@visx/legend": "^3",
-    "@visx/scale": "^3",
-    "@visx/tooltip": "^3",
-    "@visx/vendor": "^3",
-    "framer-motion": "^11",
     "topojson-client": "^3"
   },
   "peerDependencies": {
