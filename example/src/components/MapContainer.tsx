@@ -1,9 +1,14 @@
 import React from 'react';
 import { ParentSize } from '@visx/responsive';
-import UAMap from '@dkkoval/react-ua-map';
 import { useMapSettings } from '../MapSettingsContext';
+import { MDMapProps } from '@dkkoval/react-md-map';
+import { UAMapProps } from '@dkkoval/react-ua-map';
 
-const MapContainer = () => {
+interface MapContainerProps {
+  mapComponent: React.FC<UAMapProps | MDMapProps>;
+}
+
+const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
   const {
     title,
     valueName,
@@ -20,7 +25,7 @@ const MapContainer = () => {
     <div className='w-full h-4/5 border rounded-lg flex justify-center items-center bg-white shadow-md'>
       <ParentSize>
         {({ width, height }) => (
-          <UAMap
+          <MapComponent
             {...{ width, height }}
             title={title}
             valueName={valueName}

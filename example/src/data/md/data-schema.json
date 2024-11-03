@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Cahul": {
+      "type": "number"
+    },
+    "Gagauzia": {
+      "type": "number"
+    },
+    "Taraclia": {
+      "type": "number"
+    },
+    "Cantemir": {
+      "type": "number"
+    },
+    "Basarabeasca": {
+      "type": "number"
+    },
+    "Leova": {
+      "type": "number"
+    },
+    "Cimislia": {
+      "type": "number"
+    },
+    "Stefan Voda": {
+      "type": "number"
+    },
+    "Bender": {
+      "type": "number"
+    },
+    "Causeni": {
+      "type": "number"
+    },
+    "Hincesti": {
+      "type": "number"
+    },
+    "Ialoveni": {
+      "type": "number"
+    },
+    "Nisporeni": {
+      "type": "number"
+    },
+    "Chisinau": {
+      "type": "number"
+    },
+    "Anenii Noi": {
+      "type": "number"
+    },
+    "Criuleni": {
+      "type": "number"
+    },
+    "Straseni": {
+      "type": "number"
+    },
+    "Ungheni": {
+      "type": "number"
+    },
+    "Dubasari": {
+      "type": "number"
+    },
+    "Calarasi": {
+      "type": "number"
+    },
+    "Transnistria": {
+      "type": "number"
+    },
+    "Falesti": {
+      "type": "number"
+    },
+    "Orhei": {
+      "type": "number"
+    },
+    "Glodeni": {
+      "type": "number"
+    },
+    "Balti": {
+      "type": "number"
+    },
+    "Telenesti": {
+      "type": "number"
+    },
+    "SIngerei": {
+      "type": "number"
+    },
+    "RIscani": {
+      "type": "number"
+    },
+    "Rezina": {
+      "type": "number"
+    },
+    "Soldanesti": {
+      "type": "number"
+    },
+    "Floresti": {
+      "type": "number"
+    },
+    "Drochia": {
+      "type": "number"
+    },
+    "Edinet": {
+      "type": "number"
+    },
+    "Briceni": {
+      "type": "number"
+    },
+    "Soroca": {
+      "type": "number"
+    },
+    "Donduseni": {
+      "type": "number"
+    },
+    "Ocnita": {
+      "type": "number"
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import populationJson from './data/population.json';
-import { OblastCode, getOblastCode } from '@dkkoval/react-ua-map';
+import { OblastCode } from '@dkkoval/react-ua-map';
 import { ThresholdColor } from '@dkkoval/react-stats-map';
+import { RaionCode } from '@dkkoval/react-md-map';
+
+type RegionCode = OblastCode | RaionCode;
 
 export interface MapSettings {
   title: string;
@@ -11,9 +13,11 @@ export interface MapSettings {
   hideLegend: boolean;
   borderColor: string;
   defaultFillColor: string;
-  data: Record<OblastCode, number>;
+  data: Record<RegionCode, number>;
   jsonData: string;
   thresholdColors?: ThresholdColor[];
+  jsonEditorSchema: any;
+  dataKeysTransformer: (data: Record<string, number>) => Record<string, number>;
   setTitle: (title: string) => void;
   setValueName: (valueName: string) => void;
   setPadding: (padding: number) => void;
@@ -21,9 +25,18 @@ export interface MapSettings {
   setHideLegend: (hideLegend: boolean) => void;
   setBorderColor: (color: string) => void;
   setDefaultFillColor: (color: string) => void;
-  setData: (data: Record<OblastCode, number>) => void;
+  setData: (data: Record<RegionCode, number>) => void;
   setJsonData: (jsonData: string) => void;
   setThresholdColors?: (thresholdColors: ThresholdColor[]) => void;
+}
+
+export interface MapSettingsProviderProps {
+  children: ReactNode;
+  initialTitle: string;
+  initialValueName: string;
+  initialData: any;
+  jsonEditorSchema: any;
+  dataKeysTransformer: (data: Record<string, number>) => Record<RegionCode, number>;
 }
 
 const MapSettingsContext = createContext<MapSettings | undefined>(undefined);
@@ -36,29 +49,22 @@ export const useMapSettings = () => {
   return context;
 };
 
-export function transformDataKeys(data: Record<string, number>): Record<OblastCode, number> {
-  const transformedData: Partial<Record<OblastCode, number>> = {};
-
-  Object.entries(data).forEach(([key, value]) => {
-    const code = getOblastCode(key);
-    if (code) {
-      transformedData[code] = value;
-    }
-  });
-
-  return transformedData as Record<OblastCode, number>;
-}
-
-export const MapSettingsProvider = ({ children }: { children: ReactNode }) => {
-  const initialData = populationJson.data;
-  const [title, setTitle] = useState("Населення України, 2022.02, млн. осіб");
-  const [valueName, setValueName] = useState("млн. осіб");
+export const MapSettingsProvider = ({
+  children,
+  initialData,
+  initialTitle,
+  initialValueName,
+  jsonEditorSchema,
+  dataKeysTransformer,
+}: MapSettingsProviderProps) => {
+  const [title, setTitle] = useState(initialTitle);
+  const [valueName, setValueName] = useState(initialValueName);
   const [padding, setPadding] = useState(10);
   const [hideTitle, setHideTitle] = useState(false);
   const [hideLegend, setHideLegend] = useState(false);
   const [borderColor, setBorderColor] = useState('#EBF4F3');
   const [defaultFillColor, setDefaultFillColor] = useState('#cbd5e1');
-  const [data, setData] = useState(transformDataKeys(initialData));
+  const [data, setData] = useState(dataKeysTransformer(initialData));
   const [jsonData, setJsonData] = useState(JSON.stringify(initialData, null, 2));
   const [thresholdColors, setThresholdColors] = useState<ThresholdColor[] | undefined>(undefined);
 
@@ -75,6 +81,8 @@ export const MapSettingsProvider = ({ children }: { children: ReactNode }) => {
         data,
         jsonData,
         thresholdColors,
+        jsonEditorSchema,
+        dataKeysTransformer,
         setTitle,
         setValueName,
         setPadding,

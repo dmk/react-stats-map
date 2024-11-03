@@ -1,11 +1,10 @@
 import React from 'react';
 import Editor, { useMonaco } from '@monaco-editor/react';
-import populationSchema from '../data/data-schema.json';
-import { transformDataKeys, useMapSettings } from '../MapSettingsContext';
+import { useMapSettings } from '../MapSettingsContext';
 
 const EditorComponent = () => {
   const monaco = useMonaco();
-  const { jsonData, setJsonData, setData } = useMapSettings();
+  const { jsonData, setJsonData, setData, jsonEditorSchema, dataKeysTransformer } = useMapSettings();
 
   React.useEffect(() => {
     if (monaco) {
@@ -13,19 +12,19 @@ const EditorComponent = () => {
         validate: true,
         schemas: [
           {
-            uri: "http://example.com/population.schema.json", // This can be any unique URI
+            uri: "http://example.com/population.schema.json",
             fileMatch: ["*"],
-            schema: populationSchema,
+            schema: jsonEditorSchema,
           },
         ],
       });
     }
-  }, [monaco]);
+  }, [monaco, jsonEditorSchema]);
 
   const handleJsonChange = (newValue: string | undefined) => {
     setJsonData(newValue || '');
     try {
-      const parsedData = transformDataKeys(JSON.parse(newValue || '{}'));
+      const parsedData = dataKeysTransformer(JSON.parse(newValue || '{}'));
       setData(parsedData);
     } catch (error) {
       console.error("Invalid JSON format");
@@ -33,13 +32,13 @@ const EditorComponent = () => {
   };
 
   return (
-    <div className='w-1/4 mr-4 border rounded-lg flex flex-col justify-top items-center bg-white shadow-md'>
+    <div className='w-100 border rounded-lg flex flex-col justify-top items-center bg-white shadow-md'>
       <h3 className='text-lg font-semibold my-2'>Map Data (JSON)</h3>
       <Editor
         height="80vh"
         defaultLanguage="json"
-        defaultValue={jsonData}
         onChange={handleJsonChange}
+        value={jsonData}
         options={{
           minimap: { enabled: false },
           lineNumbers: 'off',

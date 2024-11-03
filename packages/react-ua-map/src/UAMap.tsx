@@ -2,7 +2,7 @@ import * as topojson from 'topojson-client';
 
 import { OblastCode } from '@/types';
 
-import topology from '../assets/maps/ua-adm1.json';
+import topology from './assets/maps/ua-adm1.json';
 import StatsMap, { MapStyle, ThresholdColor } from '@dkkoval/react-stats-map';
 
 const { features } = topojson.feature(
@@ -23,7 +23,6 @@ export interface UAMapProps {
 }
 
 export function UAMap(props: UAMapProps) {
-
   return (
     <StatsMap
       {...props}

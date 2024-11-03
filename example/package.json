@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "/react-ua-map/",
   "dependencies": {
-    "@dkkoval/react-stats-map": "^0.1.0",
-    "@dkkoval/react-ua-map": "0.1.7",
+    "@dkkoval/react-stats-map": "0.1.1",
+    "@dkkoval/react-ua-map": "0.1.9",
+    "@dkkoval/react-md-map": "0.1.6",
     "@emotion/is-prop-valid": "^1.3.1",
     "@monaco-editor/react": "^4.6.0",
     "@testing-library/jest-dom": "^5.17.0",

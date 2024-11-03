@@ -1215,7 +1215,15 @@
   resolved "https://registry.npmjs.org/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz"
   integrity sha512-+OJ9konv95ClSTOJCmMZqpd5+YGsB2S+x6w3E1oaM8UuR5j8nTNHYSz8c9BEPGDOCMQYIEEGlVPj/VY64iTbGw==
 
-"@dkkoval/react-stats-map@0.1.0", "@dkkoval/react-stats-map@^0.1.0":
+"@dkkoval/react-md-map@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@dkkoval/react-md-map/-/react-md-map-0.1.6.tgz#3fcde8aadc8b911a776e87e38631b0a6249d7b1a"
+  integrity sha512-cz/piWd+ydir5VbmUiMJyBreKX9aK24PLFQ1F3etlJh2WtHut8XgUTDj/F7dN5TLo11/iCbrorSU1aVg6j1EYg==
+  dependencies:
+    "@dkkoval/react-stats-map" "0.1.1"
+    topojson-client "^3"
+
+"@dkkoval/react-stats-map@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@dkkoval/react-stats-map/-/react-stats-map-0.1.0.tgz#6937ff34266648758ebcf6056786043d749feef3"
   integrity sha512-UY652gGccAhNQ9OWz/kWYRNc9wvpJhS4aeof6/HCBtTjoYDJo+rq8sZMfMCEGX9lPbFw6HUxS/mIyF3TXbn2Ww==
@@ -1227,17 +1235,24 @@
     framer-motion "^11"
     topojson-client "^3"
 
-"@dkkoval/react-ua-map@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@dkkoval/react-ua-map/-/react-ua-map-0.1.7.tgz#82de803ac76ea51ca4102cd00dba9db0aa36463e"
-  integrity sha512-W1TsSDdJgaKdTyCWLWHTct9YQcwG1eNAAyXKO9FwJmwV9ySE0yosz/PXy6rc209kP13L6gmMRifYJyOyF+zfkA==
+"@dkkoval/react-stats-map@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@dkkoval/react-stats-map/-/react-stats-map-0.1.1.tgz#52a9c237ece2e16b4852f33f1932165a98912ffe"
+  integrity sha512-4FFc2KlNow+5n4FTR58jrpHnpR57/pcSIOCFIadGWemuWbyMy6MhmiMdAQ+0mdkpRMkjOh+YBkCUV8N9aGMFmQ==
   dependencies:
-    "@dkkoval/react-stats-map" "0.1.0"
     "@visx/legend" "^3"
     "@visx/scale" "^3"
     "@visx/tooltip" "^3"
     "@visx/vendor" "^3"
     framer-motion "^11"
+    topojson-client "^3"
+
+"@dkkoval/react-ua-map@0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@dkkoval/react-ua-map/-/react-ua-map-0.1.9.tgz#f1291b5fbd573dcb5895077402519b834cdc06de"
+  integrity sha512-ErNTdMV1u7Hty0bdOnuZi3gRCsC+jjnrrEjQfaY39xqueQhjqyCBaBUGj7QxB+qY/vM+9A6uNKayCEklIzIqdw==
+  dependencies:
+    "@dkkoval/react-stats-map" "0.1.0"
     topojson-client "^3"
 
 "@emotion/is-prop-valid@^1.3.1":
