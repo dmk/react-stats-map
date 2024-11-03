@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-md-map",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A React component for visualizing data on a map of Ukraine by oblast.",
   "publishConfig": {
     "access": "public"
