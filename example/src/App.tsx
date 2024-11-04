@@ -69,9 +69,21 @@ function App() {
   const [country, setCountry] = useState<Country>('Ukraine');
 
   return (
-    <MapSettingsProvider {...mapSettings[country].providerProps}>
-      <Playground {...{ country, setCountry }} />
-    </MapSettingsProvider>
+    <>
+      <div className="hidden md:block">
+        <MapSettingsProvider {...mapSettings[country].providerProps}>
+          <Playground {...{ country, setCountry }} />
+        </MapSettingsProvider>
+      </div>
+      <div className="block md:hidden text-center p-4">
+        <p className="text-lg font-semibold">
+          For the best experience, please view this application on a larger screen.
+        </p>
+        <p className="text-sm text-gray-600 mt-2">
+          This feature is optimized for larger displays and may not be fully accessible on smaller screens.
+        </p>
+      </div>
+    </>
   );
 }
 
