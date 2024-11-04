@@ -2,7 +2,7 @@
   "name": "example",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/react-ua-stats-map/",
+  "homepage": "/react-stats-map/",
   "dependencies": {
     "@dkkoval/react-stats-map": "0.1.1",
     "@dkkoval/react-ua-stats-map": "0.1.0",
