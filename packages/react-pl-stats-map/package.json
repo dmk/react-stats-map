@@ -1,7 +1,7 @@
 {
-  "name": "@dkkoval/react-md-map",
-  "version": "0.1.6",
-  "description": "A React component for visualizing data on a map of Ukraine by oblast.",
+  "name": "@dkkoval/react-pl-stats-map",
+  "version": "0.1.0",
+  "description": "A React component for visualizing data on a map of Poland by voivodeship.",
   "publishConfig": {
     "access": "public"
   },
@@ -15,11 +15,11 @@
     "build": "rollup -c",
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:watch": "tsc -w"
+    "build:watch": "rollup -c -w"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmk/react-ua-map.git"
+    "url": "git+https://github.com/dmk/react-ua-stats-map.git"
   },
   "keywords": [
     "react",
@@ -33,9 +33,9 @@
   "author": "Dmytro Koval",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/dmk/react-ua-map/issues"
+    "url": "https://github.com/dmk/react-ua-stats-map/issues"
   },
-  "homepage": "https://github.com/dmk/react-ua-map#readme",
+  "homepage": "https://github.com/dmk/react-ua-stats-map#readme",
   "dependencies": {
     "@dkkoval/react-stats-map": "0.1.1",
     "topojson-client": "^3"

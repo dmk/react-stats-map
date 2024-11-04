@@ -1,0 +1,22 @@
+{
+  "title": "Population Data by Voivodeship in Poland (2023)",
+  "valueName": "mln. people",
+  "data": {
+    "Lódzkie": 2.4,
+    "Swietokrzyskie": 1.2,
+    "Wielkopolskie": 3.5,
+    "Kujawsko-Pomorskie": 2.0,
+    "Malopolskie": 3.4,
+    "Dolnoslaskie": 2.9,
+    "Lubelskie": 2.1,
+    "Lubuskie": 1.0,
+    "Mazowieckie": 5.4,
+    "Opolskie": 0.97,
+    "Podlaskie": 1.2,
+    "Pomorskie": 2.3,
+    "Slaskie": 4.4,
+    "Podkarpackie": 2.1,
+    "Warminsko-Mazurskie": 1.4,
+    "Zachodniopomorskie": 1.7
+  }
+}

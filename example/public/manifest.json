@@ -1,7 +1,7 @@
 {
   "short_name": "UAMap Playground",
   "name": "UA Map Playground",
-  "description": "An interactive playground for react-ua-map, created by Dmytro Koval. Experiment with map configurations and data for Ukraine regions.",
+  "description": "An interactive playground for react-ua-stats-map, created by Dmytro Koval. Experiment with map configurations and data for Ukraine regions.",
   "icons": [
     {
       "src": "favicon.ico",

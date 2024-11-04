@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@dkkoval/react-stats-map@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@dkkoval/react-stats-map/-/react-stats-map-0.1.0.tgz#6937ff34266648758ebcf6056786043d749feef3"
-  integrity sha512-UY652gGccAhNQ9OWz/kWYRNc9wvpJhS4aeof6/HCBtTjoYDJo+rq8sZMfMCEGX9lPbFw6HUxS/mIyF3TXbn2Ww==
+"@dkkoval/react-stats-map@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@dkkoval/react-stats-map/-/react-stats-map-0.1.1.tgz#52a9c237ece2e16b4852f33f1932165a98912ffe"
+  integrity sha512-4FFc2KlNow+5n4FTR58jrpHnpR57/pcSIOCFIadGWemuWbyMy6MhmiMdAQ+0mdkpRMkjOh+YBkCUV8N9aGMFmQ==
   dependencies:
     "@visx/legend" "^3"
     "@visx/scale" "^3"

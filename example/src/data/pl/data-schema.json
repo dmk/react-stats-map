@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Lódzkie": {
+      "type": "number"
+    },
+    "Swietokrzyskie": {
+      "type": "number"
+    },
+    "Wielkopolskie": {
+      "type": "number"
+    },
+    "Kujawsko-Pomorskie": {
+      "type": "number"
+    },
+    "Malopolskie": {
+      "type": "number"
+    },
+    "Dolnoslaskie": {
+      "type": "number"
+    },
+    "Lubelskie": {
+      "type": "number"
+    },
+    "Lubuskie": {
+      "type": "number"
+    },
+    "Mazowieckie": {
+      "type": "number"
+    },
+    "Opolskie": {
+      "type": "number"
+    },
+    "Podlaskie": {
+      "type": "number"
+    },
+    "Pomorskie": {
+      "type": "number"
+    },
+    "Slaskie": {
+      "type": "number"
+    },
+    "Podkarpackie": {
+      "type": "number"
+    },
+    "Warminsko-Mazurskie": {
+      "type": "number"
+    },
+    "Zachodniopomorskie": {
+      "type": "number"
+    }
+  }
+}

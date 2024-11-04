@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Azerbaijan": {
+      "type": "number"
+    },
+    "Albania": {
+      "type": "number"
+    },
+    "Armenia": {
+      "type": "number"
+    },
+    "Bosnia and Herzegovina": {
+      "type": "number"
+    },
+    "Bulgaria": {
+      "type": "number"
+    },
+    "Cyprus": {
+      "type": "number"
+    },
+    "Denmark": {
+      "type": "number"
+    },
+    "Ireland": {
+      "type": "number"
+    },
+    "Estonia": {
+      "type": "number"
+    },
+    "Austria": {
+      "type": "number"
+    },
+    "Czech Republic": {
+      "type": "number"
+    },
+    "Finland": {
+      "type": "number"
+    },
+    "France": {
+      "type": "number"
+    },
+    "Georgia": {
+      "type": "number"
+    },
+    "Germany": {
+      "type": "number"
+    },
+    "Greece": {
+      "type": "number"
+    },
+    "Croatia": {
+      "type": "number"
+    },
+    "Hungary": {
+      "type": "number"
+    },
+    "Iceland": {
+      "type": "number"
+    },
+    "Israel": {
+      "type": "number"
+    },
+    "Italy": {
+      "type": "number"
+    },
+    "Latvia": {
+      "type": "number"
+    },
+    "Belarus": {
+      "type": "number"
+    },
+    "Lithuania": {
+      "type": "number"
+    },
+    "Slovakia": {
+      "type": "number"
+    },
+    "Liechtenstein": {
+      "type": "number"
+    },
+    "Macedonia": {
+      "type": "number"
+    },
+    "Malta": {
+      "type": "number"
+    },
+    "Belgium": {
+      "type": "number"
+    },
+    "Faroe Islands": {
+      "type": "number"
+    },
+    "Andorra": {
+      "type": "number"
+    },
+    "Luxembourg": {
+      "type": "number"
+    },
+    "Monaco": {
+      "type": "number"
+    },
+    "Montenegro": {
+      "type": "number"
+    },
+    "Netherlands": {
+      "type": "number"
+    },
+    "Norway": {
+      "type": "number"
+    },
+    "Poland": {
+      "type": "number"
+    },
+    "Portugal": {
+      "type": "number"
+    },
+    "Romania": {
+      "type": "number"
+    },
+    "Republic of Moldova": {
+      "type": "number"
+    },
+    "Slovenia": {
+      "type": "number"
+    },
+    "Spain": {
+      "type": "number"
+    },
+    "Sweden": {
+      "type": "number"
+    },
+    "Switzerland": {
+      "type": "number"
+    },
+    "Turkey": {
+      "type": "number"
+    },
+    "United Kingdom": {
+      "type": "number"
+    },
+    "Ukraine": {
+      "type": "number"
+    },
+    "San Marino": {
+      "type": "number"
+    },
+    "Serbia": {
+      "type": "number"
+    },
+    "Vatican City": {
+      "type": "number"
+    }
+  }
+}

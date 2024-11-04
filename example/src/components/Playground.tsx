@@ -2,9 +2,7 @@ import EditorComponent from '../components/EditorComponent';
 import MapContainer from '../components/MapContainer';
 import TabControls from '../components/TabControls';
 import { useMapSettings } from '../MapSettingsContext';
-import { mapSettings } from '../App';
-
-type Country = 'Ukraine' | 'Moldova';
+import { Country, mapSettings } from '../App';
 
 interface PlaygroundProps {
   country: Country;
@@ -38,6 +36,8 @@ function Playground({ country, setCountry }: PlaygroundProps) {
         >
           <option value="Ukraine">Ukraine</option>
           <option value="Moldova">Moldova</option>
+          <option value="Poland">Poland</option>
+          <option value="Europe">Europe</option>
         </select>
         <div className="overflow-y-auto w-full p-0 rounded-md shadow-sm">
           <EditorComponent />

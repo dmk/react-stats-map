@@ -1,17 +1,26 @@
 import { MapSettingsProvider, } from './MapSettingsContext';
 import { useState } from 'react';
-import UAMap from '@dkkoval/react-ua-map';
-import MDMap from '@dkkoval/react-md-map';
+import UAMap from '@dkkoval/react-ua-stats-map';
+import MDMap from '@dkkoval/react-md-stats-map';
+import PLMap from '@dkkoval/react-pl-stats-map';
+import EUMap from '@dkkoval/react-eu-stats-map';
 
 import uaPopulationJson from './data/ua/population.json';
 import uaJsonEditorSchema from './data/ua/data-schema.json';
 
 import mdPopulationJson from './data/md/population.json';
 import mdJsonEditorSchema from './data/md/data-schema.json';
-import { transformMDDataKeys, transformUADataKeys } from './utils/transformers';
+
+import plPopulationJson from './data/pl/population.json';
+import plJsonEditorSchema from './data/pl/data-schema.json';
+
+import euPopulationJson from './data/eu/population.json';
+import euJsonEditorSchema from './data/eu/data-schema.json';
+
+import { transformEUDataKeys, transformMDDataKeys, transformPLDataKeys, transformUADataKeys } from './utils/transformers';
 import Playground from './components/Playground';
 
-type Country = 'Ukraine' | 'Moldova';
+export type Country = 'Ukraine' | 'Moldova' | 'Poland' | 'Europe';
 
 export const mapSettings: Record<Country, any> = {
   'Ukraine': {
@@ -33,7 +42,27 @@ export const mapSettings: Record<Country, any> = {
       jsonEditorSchema: mdJsonEditorSchema,
       dataKeysTransformer: transformMDDataKeys,
     }
-  }
+  },
+  'Poland': {
+    mapComponent: PLMap,
+    providerProps: {
+      initialTitle: plPopulationJson.title,
+      initialValueName: plPopulationJson.valueName,
+      initialData: plPopulationJson.data,
+      jsonEditorSchema: plJsonEditorSchema,
+      dataKeysTransformer: transformPLDataKeys,
+    }
+  },
+  'Europe': {
+    mapComponent: EUMap,
+    providerProps: {
+      initialTitle: euPopulationJson.title,
+      initialValueName: euPopulationJson.valueName,
+      initialData: euPopulationJson.data,
+      jsonEditorSchema: euJsonEditorSchema,
+      dataKeysTransformer: transformEUDataKeys,
+    }
+  },
 }
 
 function App() {

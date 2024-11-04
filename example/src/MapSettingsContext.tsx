@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { OblastCode } from '@dkkoval/react-ua-map';
+import { OblastCode } from '@dkkoval/react-ua-stats-map';
 import { ThresholdColor } from '@dkkoval/react-stats-map';
-import { RaionCode } from '@dkkoval/react-md-map';
+import { RaionCode } from '@dkkoval/react-md-stats-map';
 
 type RegionCode = OblastCode | RaionCode;
 

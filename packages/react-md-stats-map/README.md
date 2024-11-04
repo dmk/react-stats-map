@@ -1,4 +1,4 @@
-# @dkkoval/react-ua-map
+# @dkkoval/react-ua-stats-map
 
 A React component for visualizing data on a map of Ukraine by oblast. This package makes it easy to present regional data visually, providing a choropleth map representation of Ukrainian oblasts (regions).
 
@@ -14,13 +14,13 @@ A React component for visualizing data on a map of Ukraine by oblast. This packa
 To install the package, use npm or yarn:
 
 ```sh
-npm install @dkkoval/react-ua-map
+npm install @dkkoval/react-ua-stats-map
 ```
 
 or
 
 ```sh
-yarn add @dkkoval/react-ua-map
+yarn add @dkkoval/react-ua-stats-map
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ Here is an example of how to use the `UAMap` component in a React application.
 import { ParentSize } from '@visx/responsive';
 import './App.css';
 import populationJson from './data/population.json';
-import UAMap, { getOblastCode, OblastCode } from '@dkkoval/react-ua-map';
+import UAMap, { getOblastCode, OblastCode } from '@dkkoval/react-ua-stats-map';
 
 interface MapData {
   title: string;

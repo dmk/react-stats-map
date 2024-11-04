@@ -1,11 +1,13 @@
 import React from 'react';
 import { ParentSize } from '@visx/responsive';
 import { useMapSettings } from '../MapSettingsContext';
-import { MDMapProps } from '@dkkoval/react-md-map';
-import { UAMapProps } from '@dkkoval/react-ua-map';
+import { MDMapProps } from '@dkkoval/react-md-stats-map';
+import { UAMapProps } from '@dkkoval/react-ua-stats-map';
+import { PLMapProps } from '@dkkoval/react-pl-stats-map';
+import { EUMapProps } from '@dkkoval/react-eu-stats-map';
 
 interface MapContainerProps {
-  mapComponent: React.FC<UAMapProps | MDMapProps>;
+  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps>;
 }
 
 const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
