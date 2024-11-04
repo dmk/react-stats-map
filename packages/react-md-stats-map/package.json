@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-md-stats-map",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A React component for visualizing data on a map of Moldova by raion.",
   "publishConfig": {
     "access": "public"
