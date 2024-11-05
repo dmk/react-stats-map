@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-pl-stats-map",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A React component for visualizing data on a map of Poland by voivodeship.",
   "publishConfig": {
     "access": "public"
@@ -26,7 +26,7 @@
     "react",
     "typescript",
     "map",
-    "ukraine",
+    "poland",
     "d3",
     "visx",
     "data-visualisation"
@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/dmk/react-stats-map#readme",
   "dependencies": {
-    "@dkkoval/react-stats-map": "0.1.1",
+    "@dkkoval/react-stats-map": "0.1.3",
     "topojson-client": "^3"
   },
   "peerDependencies": {
