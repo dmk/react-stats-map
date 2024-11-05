@@ -1,4 +1,4 @@
-# @dkkoval/react-ua-stats-map
+# @dkkoval/react-ua-map
 
 A React component for visualizing data on a map of Ukraine by oblast. This package makes it easy to present regional data visually, providing a choropleth map representation of Ukrainian oblasts (regions).
 
@@ -14,13 +14,13 @@ A React component for visualizing data on a map of Ukraine by oblast. This packa
 To install the package, use npm or yarn:
 
 ```sh
-npm install @dkkoval/react-ua-stats-map
+npm install @dkkoval/react-ua-map
 ```
 
 or
 
 ```sh
-yarn add @dkkoval/react-ua-stats-map
+yarn add @dkkoval/react-ua-map
 ```
 
 ## Usage
@@ -30,16 +30,15 @@ Here is an example of how to use the `UAMap` component in a React application.
 ### Example
 
 ```jsx
-import { ParentSize } from '@visx/responsive';
-import './App.css';
-import populationJson from './data/population.json';
+import populationJson from './population.json';
 import UAMap, { getOblastCode, OblastCode } from '@dkkoval/react-ua-stats-map';
 
-interface MapData {
+// Assuming the json file has title and value name
+interface StatsData {
   title: string;
   valueName: string;
   data: {
-    [region: string]: number;
+    [region: OblastCode]: number;
   };
 }
 
@@ -58,7 +57,7 @@ function transformDataKeys(data: Record<string, number>): Record<OblastCode, num
 }
 
 function App() {
-  const { data: rawData, title, valueName }: MapData = populationJson;
+  const { data: rawData, title, valueName }: StatsData = populationJson;
 
   const data = transformDataKeys(rawData);
 
@@ -72,16 +71,13 @@ function App() {
       alignItems: 'center',
       margin: '24px',
     }}>
-      <ParentSize>
-        {({ width, height }) => (
-          <UAMap
-            {...{ width, height }}
-            title={title}
-            valueName={valueName}
-            data={data}
-          />
-        )}
-      </ParentSize>
+      <UAMap
+        width={800}
+        height={500}
+        title={title}
+        valueName={valueName}
+        data={data}
+      />
     </div>
   );
 }
@@ -94,7 +90,7 @@ export default App;
 - **width**: The width of the map (number).
 - **height**: The height of the map (number).
 - **title**: A string to display as the map title.
-- **valueName**: The unit or type of data being visualized (e.g., "Population").
+- **valueName**: The unit or type of data being visualized (e.g., "milions people").
 - **data**: An object representing the values to display for each oblast, where the keys are oblast codes and values are numerical data.
 
 ### Oblast Codes
@@ -137,7 +133,7 @@ The `data` prop should use oblast codenames as keys to identify different region
 
 ## License
 
-This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE.txt) file for details.
 
 ## Contributing
 
@@ -146,4 +142,3 @@ Contributions are welcome! Feel free to open an issue or submit a pull request i
 ## Contact
 
 Created by Dmytro Koval. You can reach out via GitHub for any questions or feedback.
-

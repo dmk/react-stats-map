@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-stats-map",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A React component for visualizing data on a map of Ukraine by oblast.",
   "publishConfig": {
     "access": "public"
@@ -19,7 +19,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmk/react-ua-stats-map.git"
+    "url": "git+https://github.com/dmk/react-ua-stats-map.git",
+    "directory": "packages/react-stats-map"
   },
   "keywords": [
     "react",
