@@ -167,7 +167,7 @@ The generation process creates a `.generation-hash` file that stores:
 
 This file is used to detect if regeneration is needed.
 
-**Note:** The `.generation-hash` file is gitignored and should not be committed.
+**Important:** The `.generation-hash` file MUST be committed to the repository so that CI can verify packages are up-to-date.
 
 ## Best Practices
 
