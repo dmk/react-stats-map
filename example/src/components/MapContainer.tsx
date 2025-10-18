@@ -5,9 +5,10 @@ import { MDMapProps } from '@dkkoval/react-md-stats-map';
 import { UAMapProps } from '@dkkoval/react-ua-stats-map';
 import { PLMapProps } from '@dkkoval/react-pl-stats-map';
 import { EUMapProps } from '@dkkoval/react-eu-stats-map';
+import { FRMapProps } from '@dkkoval/react-fr-stats-map';
 
 interface MapContainerProps {
-  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps>;
+  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps | FRMapProps>;
 }
 
 const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
