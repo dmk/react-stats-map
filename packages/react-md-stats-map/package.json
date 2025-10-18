@@ -1,6 +1,6 @@
 {
   "name": "@dkkoval/react-md-stats-map",
-  "version": "0.1.5",
+  "version": "0.1.2",
   "description": "A React component for visualizing data on a map of Moldova by raion.",
   "publishConfig": {
     "access": "public"
@@ -22,15 +22,7 @@
     "url": "git+https://github.com/dmk/react-stats-map.git",
     "directory": "packages/react-md-stats-map"
   },
-  "keywords": [
-    "react",
-    "typescript",
-    "map",
-    "moldova",
-    "d3",
-    "visx",
-    "data-visualisation"
-  ],
+  "keywords": ["react","typescript","map","moldova","d3","visx","data-visualisation"],
   "author": "Dmytro Koval",
   "license": "Apache-2.0",
   "bugs": {

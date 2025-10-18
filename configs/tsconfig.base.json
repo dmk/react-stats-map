@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base TypeScript Config for React Stats Map Packages",
   "compilerOptions": {
     "target": "ES2015",
     "module": "ESNext",
@@ -22,3 +24,5 @@
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
+
+

@@ -22,15 +22,7 @@
     "url": "git+https://github.com/dmk/react-stats-map.git",
     "directory": "packages/react-eu-stats-map"
   },
-  "keywords": [
-    "react",
-    "typescript",
-    "map",
-    "europe",
-    "d3",
-    "visx",
-    "data-visualisation"
-  ],
+  "keywords": ["react","typescript","map","europe","d3","visx","data-visualisation"],
   "author": "Dmytro Koval",
   "license": "Apache-2.0",
   "bugs": {

@@ -1,20 +1,20 @@
 import React from 'react';
 import { feature } from 'topojson-client';
 
-import { OblastCode } from '@/types';
+import { {{REGION_CODE_TYPE}} } from '@/types';
 
-import topology from './assets/maps/ua-adm1.json';
+import topology from './assets/maps/{{GEOJSON_FILE}}';
 import StatsMap, { MapStyle, ThresholdColor } from '@dkkoval/react-stats-map';
 
 const { features } = feature(
   topology as any,
-  topology.objects.ukraine as any
+  topology.objects.{{TOPOJSON_OBJECT}} as any
 ) as any;
 
-export interface UAMapProps {
+export interface {{PROPS_NAME}} {
   width: number;
   height: number;
-  data: Record<OblastCode, number>;
+  data: Record<{{REGION_CODE_TYPE}}, number>;
   valueName: string;
   title: string;
   hideLegend?: boolean;
@@ -23,13 +23,13 @@ export interface UAMapProps {
   thresholdColors?: ThresholdColor[];
 }
 
-export function UAMap(props: UAMapProps) {
+export function {{COMPONENT_NAME}}(props: {{PROPS_NAME}}) {
   return (
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.properties.name}
-      codeAccessor={(f) => f.properties.code}
+      nameAccessor={(f) => f.{{NAME_ACCESSOR}}}
+      codeAccessor={(f) => f.{{CODE_ACCESSOR}}}
     />
   )
 }

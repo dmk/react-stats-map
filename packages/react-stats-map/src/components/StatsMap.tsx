@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { Feature, FeatureCollection } from 'topojson-client';
+import type { Feature, FeatureCollection } from 'geojson';
 
 import { scaleThreshold } from '@visx/scale';
 import { TooltipWithBounds, useTooltip } from '@visx/tooltip';
@@ -23,7 +23,7 @@ export interface MapStyle {
 }
 
 export interface StatsMapProps {
-  topojsonFeatures: FeatureCollection;
+  topojsonFeatures: Feature[];
   width: number;
   height: number;
   data: Record<string, number>;

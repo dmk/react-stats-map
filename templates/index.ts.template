@@ -1,0 +1,6 @@
+import { {{COMPONENT_NAME}} } from './{{COMPONENT_NAME}}';
+
+export default {{COMPONENT_NAME}};
+export type { {{PROPS_NAME}} } from './{{COMPONENT_NAME}}';
+export * from './types';
+export { {{HELPER_FUNCTION_NAME}} } from './utils';

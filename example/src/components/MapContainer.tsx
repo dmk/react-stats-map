@@ -26,22 +26,29 @@ const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
   return (
     <div className='w-full h-4/5 border rounded-lg flex justify-center items-center bg-white shadow-md'>
       <ParentSize>
-        {({ width, height }) => (
-          <MapComponent
-            {...{ width, height }}
-            title={title}
-            valueName={valueName}
-            data={data}
-            mapStyle={{
-              padding,
-              borderColor,
-              defaultFillColor,
-            }}
-            hideTitle={hideTitle}
-            hideLegend={hideLegend}
-            thresholdColors={thresholdColors}
-          />
-        )}
+        {({ width, height }) => {
+          // Don't render until we have valid dimensions
+          if (width === 0 || height === 0) {
+            return null;
+          }
+          
+          return (
+            <MapComponent
+              {...{ width, height }}
+              title={title}
+              valueName={valueName}
+              data={data}
+              mapStyle={{
+                padding,
+                borderColor,
+                defaultFillColor,
+              }}
+              hideTitle={hideTitle}
+              hideLegend={hideLegend}
+              thresholdColors={thresholdColors}
+            />
+          );
+        }}
       </ParentSize>
     </div>
   );

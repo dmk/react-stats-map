@@ -1,14 +1,15 @@
-import * as topojson from 'topojson-client';
+import React from 'react';
+import { feature } from 'topojson-client';
 
 import { VoivodeshipCode } from '@/types';
 
 import topology from './assets/maps/pl-adm1.json';
 import StatsMap, { MapStyle, ThresholdColor } from '@dkkoval/react-stats-map';
 
-const { features } = topojson.feature(
-  topology,
-  topology.objects.POL_adm1
-) as topojson.FeatureCollection;
+const { features } = feature(
+  topology as any,
+  topology.objects.POL_adm1 as any
+) as any;
 
 export interface PLMapProps {
   width: number;

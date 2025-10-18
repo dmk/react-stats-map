@@ -1,14 +1,15 @@
-import * as topojson from 'topojson-client';
+import React from 'react';
+import { feature } from 'topojson-client';
 
 import { RaionCode } from '@/types';
 
 import topology from './assets/maps/md-adm1.json';
 import StatsMap, { MapStyle, ThresholdColor } from '@dkkoval/react-stats-map';
 
-const { features } = topojson.feature(
-  topology,
-  topology.objects.moldova
-) as topojson.FeatureCollection;
+const { features } = feature(
+  topology as any,
+  topology.objects.moldova as any
+) as any;
 
 export interface MDMapProps {
   width: number;
