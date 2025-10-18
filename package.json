@@ -4,15 +4,19 @@
   "version": "1.0.0",
   "scripts": {
     "generate": "node scripts/generate-packages.js",
+    "verify": "node scripts/verify-packages.js",
     "build:packages": "node scripts/build-packages.js",
     "clean:packages": "node scripts/clean-packages.js",
     "build:all": "pnpm build:packages && pnpm --filter example build",
     "dev": "pnpm build:packages && pnpm --filter example start",
     "example": "pnpm --filter example start",
-    "build:example": "pnpm build:packages && pnpm --filter example build"
+    "build:example": "pnpm build:packages && pnpm --filter example build",
+    "prepare": "husky install",
+    "precommit": "node scripts/verify-packages.js"
   },
   "devDependencies": {
     "@types/topojson-client": "^3.1.5",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "husky": "^8.0.3"
   }
 }

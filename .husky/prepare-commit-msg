@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Optional: Add automated reminders to commit messages
+# This is useful for tracking what was regenerated
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Only run for regular commits (not merges, rebases, etc.)
+if [ -z "$COMMIT_SOURCE" ]; then
+  # Check if any generated package files are staged
+  STAGED_PACKAGES=$(git diff --cached --name-only | grep "^packages/react-.*-stats-map/" || true)
+  
+  if [ -n "$STAGED_PACKAGES" ]; then
+    # Add a hint to the commit message
+    echo "" >> "$COMMIT_MSG_FILE"
+    echo "# Generated packages were updated" >> "$COMMIT_MSG_FILE"
+  fi
+fi
+

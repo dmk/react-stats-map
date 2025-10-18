@@ -1,0 +1,236 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  verify-generation:
+    name: Verify Package Generation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      - name: Install root dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      
+      - name: Verify packages are up-to-date
+        run: node scripts/verify-packages.js
+        
+      - name: Check if generation is needed (on failure)
+        if: failure()
+        run: |
+          echo "::error::Generated packages are out of date. Run 'pnpm generate' locally and commit the changes."
+          exit 1
+
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: verify-generation
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build all packages
+        run: pnpm build:packages
+      
+      - name: Run tests (example)
+        run: pnpm --filter example test --passWithNoTests || true
+        
+      - name: Build example app
+        run: pnpm build:example
+      
+      - name: Check for build artifacts
+        run: |
+          # Verify that dist directories were created
+          for pkg in packages/*/dist; do
+            if [ -d "$pkg" ]; then
+              echo "✅ Found: $pkg"
+            else
+              echo "❌ Missing: $pkg"
+              exit 1
+            fi
+          done
+          
+          # Verify example build
+          if [ -d "example/build" ]; then
+            echo "✅ Example app built successfully"
+          else
+            echo "❌ Example app build failed"
+            exit 1
+          fi
+
+  lint-templates:
+    name: Lint Templates and Scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Check template syntax
+        run: |
+          # Check that all required templates exist
+          TEMPLATES="Component.tsx.template types.ts.template utils.ts.template index.ts.template package.json.template rollup.config.js.template tsconfig.json.template README.md.template"
+          
+          for template in $TEMPLATES; do
+            if [ -f "templates/$template" ]; then
+              echo "✅ Template exists: $template"
+            else
+              echo "❌ Template missing: $template"
+              exit 1
+            fi
+          done
+      
+      - name: Validate maps configuration
+        run: |
+          # Validate JSON syntax
+          if node -e "JSON.parse(require('fs').readFileSync('config/maps.config.json', 'utf8'))"; then
+            echo "✅ maps.config.json is valid JSON"
+          else
+            echo "❌ maps.config.json has invalid JSON syntax"
+            exit 1
+          fi
+      
+      - name: Check map files
+        run: |
+          # Read config and check that all referenced map files exist
+          MAP_FILES=$(node -e "
+            const config = require('./config/maps.config.json');
+            config.forEach(c => console.log(c.geojsonFile));
+          ")
+          
+          for mapfile in $MAP_FILES; do
+            if [ -f "maps/$mapfile" ]; then
+              echo "✅ Map file exists: $mapfile"
+            else
+              echo "❌ Map file missing: $mapfile"
+              exit 1
+            fi
+          done
+
+  check-consistency:
+    name: Check Package Consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: verify-generation
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Verify workspace structure
+        run: |
+          # Check that pnpm-workspace.yaml is valid
+          if [ -f "pnpm-workspace.yaml" ]; then
+            echo "✅ pnpm-workspace.yaml exists"
+          else
+            echo "❌ pnpm-workspace.yaml is missing"
+            exit 1
+          fi
+      
+      - name: Check package consistency
+        run: |
+          # Verify all packages are listed in the workspace
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const config = JSON.parse(fs.readFileSync('config/maps.config.json', 'utf8'));
+            
+            let failed = false;
+            config.forEach(c => {
+              const pkgDir = path.join('packages', \`react-\${c.id}-stats-map\`);
+              const pkgJson = path.join(pkgDir, 'package.json');
+              
+              if (!fs.existsSync(pkgJson)) {
+                console.log(\`❌ Package missing: \${pkgDir}\`);
+                failed = true;
+              } else {
+                const pkg = JSON.parse(fs.readFileSync(pkgJson, 'utf8'));
+                if (pkg.name !== c.packageName) {
+                  console.log(\`❌ Package name mismatch in \${pkgDir}: expected \${c.packageName}, got \${pkg.name}\`);
+                  failed = true;
+                } else {
+                  console.log(\`✅ Package OK: \${pkg.name}\`);
+                }
+              }
+            });
+            
+            if (failed) process.exit(1);
+          "
+
