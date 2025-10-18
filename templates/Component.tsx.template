@@ -28,8 +28,8 @@ export function {{COMPONENT_NAME}}(props: {{PROPS_NAME}}) {
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.{{NAME_ACCESSOR}}}
-      codeAccessor={(f) => f.{{CODE_ACCESSOR}}}
+      nameAccessor={(f) => (f.{{NAME_ACCESSOR}} ?? '') as string}
+      codeAccessor={(f) => (f.{{CODE_ACCESSOR}} ?? '') as string}
     />
   )
 }

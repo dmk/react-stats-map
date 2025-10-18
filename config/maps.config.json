@@ -15,8 +15,8 @@
       "SM", "TP", "ZK", "VI", "VO", "ZP", "ZT"
     ],
     "accessors": {
-      "name": "properties.name",
-      "code": "properties.code"
+      "name": "properties?.name",
+      "code": "properties?.code"
     },
     "helperFunction": {
       "name": "getOblastCode",
@@ -68,8 +68,8 @@
       "LD", "SK", "WP", "KP", "MA", "DS", "LU", "LB", "MZ", "OP", "PD", "PM", "SL", "PK", "WN", "ZP"
     ],
     "accessors": {
-      "name": "properties.VARNAME_1",
-      "code": "properties.CODE_1"
+      "name": "properties?.VARNAME_1",
+      "code": "properties?.CODE_1"
     },
     "helperFunction": {
       "name": "getVoivodeshipCode",
@@ -113,8 +113,8 @@
       "BR", "SO", "DO", "OC"
     ],
     "accessors": {
-      "name": "properties.shapeName",
-      "code": "properties.shapeISO"
+      "name": "properties?.shapeName",
+      "code": "properties?.shapeISO"
     },
     "helperFunction": {
       "name": "getRaionCode",
@@ -179,7 +179,7 @@
       "MD", "SI", "ES", "SE", "CH", "TR", "GB", "UA", "SM", "RS", "VA"
     ],
     "accessors": {
-      "name": "properties.NAME",
+      "name": "properties?.NAME",
       "code": "id"
     },
     "helperFunction": {

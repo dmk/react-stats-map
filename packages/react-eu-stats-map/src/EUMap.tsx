@@ -28,8 +28,8 @@ export function EUMap(props: EUMapProps) {
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.properties.NAME}
-      codeAccessor={(f) => f.id}
+      nameAccessor={(f) => (f.properties?.NAME ?? '') as string}
+      codeAccessor={(f) => (f.id ?? '') as string}
     />
   )
 }

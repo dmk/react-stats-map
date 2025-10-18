@@ -28,8 +28,8 @@ export function PLMap(props: PLMapProps) {
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.properties.VARNAME_1}
-      codeAccessor={(f) => f.properties.CODE_1}
+      nameAccessor={(f) => (f.properties?.VARNAME_1 ?? '') as string}
+      codeAccessor={(f) => (f.properties?.CODE_1 ?? '') as string}
     />
   )
 }
