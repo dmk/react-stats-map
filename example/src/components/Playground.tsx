@@ -38,6 +38,7 @@ function Playground({ country, setCountry }: PlaygroundProps) {
           <option value="Moldova">Moldova</option>
           <option value="Poland">Poland</option>
           <option value="Europe">Europe</option>
+          <option value="France">France</option>
         </select>
         <div className="overflow-y-auto w-full p-0 rounded-md shadow-sm">
           <EditorComponent />

@@ -240,6 +240,45 @@
     },
     "description": "A React component for visualizing data on a map of Europe by country.",
     "keywords": ["react", "typescript", "map", "europe", "d3", "visx", "data-visualisation"]
+  },
+  {
+    "id": "fr",
+    "name": "France",
+    "packageName": "@dkkoval/react-fr-stats-map",
+    "componentName": "FRMap",
+    "propsName": "FRMapProps",
+    "geojsonFile": "fr-adm1.json",
+    "topojsonObject": "france",
+    "regionType": "Region",
+    "regionCodeType": "RegionCode",
+    "regionCodes": [
+      "11", "24", "27", "28", "32", "44", "52", "53", "75", "76", "84", "93", "94"
+    ],
+    "accessors": {
+      "name": "properties?.nom",
+      "code": "properties?.code"
+    },
+    "helperFunction": {
+      "name": "getRegionCode",
+      "mapping": {
+        "11": ["île-de-france", "ile-de-france", "paris"],
+        "24": ["centre-val de loire", "centre"],
+        "27": ["bourgogne-franche-comté", "bourgogne-franche-comte"],
+        "28": ["normandie", "normandy"],
+        "32": ["hauts-de-france"],
+        "44": ["grand est"],
+        "52": ["pays de la loire"],
+        "53": ["bretagne", "brittany"],
+        "75": ["nouvelle-aquitaine"],
+        "76": ["occitanie"],
+        "84": ["auvergne-rhône-alpes", "auvergne-rhone-alpes"],
+        "93": ["provence-alpes-côte d'azur", "provence-alpes-cote d'azur", "paca"],
+        "94": ["corse", "corsica"]
+      },
+      "normalization": "toLowerCase().replace(/[.,]/g, '').replace(/\\s*(région|region)\\s*/g, '').trim()"
+    },
+    "description": "A React component for visualizing data on a map of France by region.",
+    "keywords": ["react", "typescript", "map", "france", "d3", "visx", "data-visualisation"]
   }
 ]
 

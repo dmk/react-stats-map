@@ -1,0 +1,20 @@
+{
+  "title": "Population de France, 2024, millions d'habitants",
+  "valueName": "millions",
+  "data": {
+    "Île-de-France": 12.26,
+    "Centre-Val de Loire": 2.57,
+    "Bourgogne-Franche-Comté": 2.80,
+    "Normandie": 3.33,
+    "Hauts-de-France": 6.00,
+    "Grand Est": 5.56,
+    "Pays de la Loire": 3.83,
+    "Bretagne": 3.37,
+    "Nouvelle-Aquitaine": 6.03,
+    "Occitanie": 5.97,
+    "Auvergne-Rhône-Alpes": 8.08,
+    "Provence-Alpes-Côte d'Azur": 5.09,
+    "Corse": 0.35
+  }
+}
+
