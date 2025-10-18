@@ -41,6 +41,7 @@
     "@visx/scale": "^3",
     "@visx/tooltip": "^3",
     "@visx/vendor": "^3",
+    "d3-scale": "^4",
     "framer-motion": "^11",
     "topojson-client": "^3"
   },
@@ -53,12 +54,15 @@
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
+    "@types/d3-scale": "^4",
+    "@types/geojson": "^7946.0.14",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "rollup": "^4.24.2",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.8.1",
     "typescript": "^5.6.3"
   }
 }

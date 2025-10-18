@@ -1,0 +1,6 @@
+# Enable shamefully-hoist to help with peer dependencies
+shamefully-hoist=true
+
+# Strict peer dependencies
+strict-peer-dependencies=false
+

@@ -28,8 +28,8 @@ export function MDMap(props: MDMapProps) {
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.properties.shapeName}
-      codeAccessor={(f) => f.properties.shapeISO}
+      nameAccessor={(f) => (f.properties?.shapeName ?? '') as string}
+      codeAccessor={(f) => (f.properties?.shapeISO ?? '') as string}
     />
   )
 }

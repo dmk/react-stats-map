@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/dmk/react-stats-map#readme",
   "dependencies": {
-    "@dkkoval/react-stats-map": "{{CORE_VERSION}}",
+    "@dkkoval/react-stats-map": "workspace:*",
     "topojson-client": "^3"
   },
   "peerDependencies": {

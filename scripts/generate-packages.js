@@ -157,9 +157,9 @@ mapsConfig.forEach((config) => {
 
 console.log('🎉 All packages generated successfully!');
 console.log('\n📝 Next steps:');
-console.log('  1. Run: yarn install (to set up workspaces)');
-console.log('  2. Run: yarn build:all (to build all packages)');
+console.log('  1. Run: pnpm install (to set up workspaces)');
+console.log('  2. Run: pnpm build:all (to build all packages)');
 console.log('\n💡 To add a new map:');
 console.log('  1. Add the geojson file to maps/');
 console.log('  2. Add configuration to config/maps.config.json');
-console.log('  3. Run: yarn generate');
+console.log('  3. Run: pnpm generate');

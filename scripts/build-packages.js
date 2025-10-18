@@ -16,7 +16,7 @@ function buildPackage(packageName) {
   console.log(`\n📦 Building ${packageName}...`);
   
   try {
-    execSync('yarn build', {
+    execSync('pnpm build', {
       cwd: packagePath,
       stdio: 'inherit'
     });

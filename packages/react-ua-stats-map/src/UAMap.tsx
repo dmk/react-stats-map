@@ -28,8 +28,8 @@ export function UAMap(props: UAMapProps) {
     <StatsMap
       {...props}
       topojsonFeatures={features}
-      nameAccessor={(f) => f.properties.name}
-      codeAccessor={(f) => f.properties.code}
+      nameAccessor={(f) => (f.properties?.name ?? '') as string}
+      codeAccessor={(f) => (f.properties?.code ?? '') as string}
     />
   )
 }

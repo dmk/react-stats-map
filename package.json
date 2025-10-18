@@ -2,18 +2,14 @@
   "name": "react-stats-map-monorepo",
   "private": true,
   "version": "1.0.0",
-  "workspaces": [
-    "packages/*",
-    "example"
-  ],
   "scripts": {
     "generate": "node scripts/generate-packages.js",
     "build:packages": "node scripts/build-packages.js",
     "clean:packages": "node scripts/clean-packages.js",
-    "build:all": "yarn build:packages && cd example && yarn build",
-    "dev": "yarn build:packages && yarn workspace example start",
-    "example": "yarn workspace example start",
-    "build:example": "yarn build:packages && yarn workspace example build"
+    "build:all": "pnpm build:packages && pnpm --filter example build",
+    "dev": "pnpm build:packages && pnpm --filter example start",
+    "example": "pnpm --filter example start",
+    "build:example": "pnpm build:packages && pnpm --filter example build"
   },
   "devDependencies": {
     "@types/topojson-client": "^3.1.5",
