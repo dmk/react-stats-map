@@ -1,0 +1,70 @@
+name: Publish Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish (leave empty for all)'
+        required: false
+        type: string
+      dry-run:
+        description: 'Dry run (no actual publish)'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build all packages
+        run: pnpm build:packages
+      
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ "${{ github.event.inputs.dry-run }}" = "true" ]; then
+            echo "🔍 DRY RUN MODE - No packages will be published"
+            DRY_RUN="--dry-run"
+          else
+            echo "📦 Publishing packages to npm..."
+            DRY_RUN=""
+          fi
+          
+          if [ -n "${{ github.event.inputs.package }}" ]; then
+            echo "Publishing single package: ${{ github.event.inputs.package }}"
+            cd "packages/${{ github.event.inputs.package }}"
+            pnpm publish --access public --no-git-checks $DRY_RUN
+          else
+            echo "Publishing all packages..."
+            for pkg in packages/react-*-stats-map; do
+              if [ -d "$pkg" ]; then
+                echo "Publishing $(basename $pkg)..."
+                cd "$pkg"
+                pnpm publish --access public --no-git-checks $DRY_RUN || echo "⚠️  Failed to publish $(basename $pkg)"
+                cd ../..
+              fi
+            done
+          fi
+

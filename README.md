@@ -43,20 +43,31 @@ This is a **template-based monorepo** that generates multiple NPM packages from 
 ### Prerequisites
 
 - Node.js 18+ (or use asdf: `asdf install`)
-- npm or yarn
+- pnpm (recommended) or npm
 
 ### Installation
 
 ```bash
-# Install dependencies for all packages
-npm install
+# Install dependencies for all packages (this will set up pre-commit hooks)
+pnpm install
 
 # Generate all country-specific packages from templates
-npm run generate
+pnpm generate
 
 # Build all packages
-npm run build:all
+pnpm build:all
 ```
+
+### ⚙️ CI/CD Setup
+
+This repository includes:
+- **Pre-commit hooks** that verify package generation status
+- **GitHub Actions** for automated testing and building
+- **Verification scripts** to ensure packages stay in sync with templates
+
+After cloning, the pre-commit hooks are automatically set up via `pnpm install`.
+
+📖 See [CI_SETUP.md](./CI_SETUP.md) for detailed documentation or [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md) for a quick start guide.
 
 ## 📦 Packages
 
@@ -133,10 +144,12 @@ That's it! Your new package is ready to publish.
 
 1. **Edit the templates** in `templates/` directory
 2. **Or update** `config/maps.config.json` for configuration changes
-3. **Re-generate** packages: `npm run generate`
-4. **Rebuild** packages: `npm run build:all`
+3. **Re-generate** packages: `pnpm generate`
+4. **Rebuild** packages: `pnpm build:all`
 
 **DO NOT** manually edit files in generated packages - your changes will be overwritten!
+
+**Note:** When you commit changes to templates or configuration, the pre-commit hook will automatically verify that you've regenerated the packages. If not, the commit will be blocked with instructions.
 
 ### Modifying the Core Package
 
@@ -153,9 +166,11 @@ npm run build
 From the root directory:
 
 ```bash
-npm run generate    # Generate all packages from templates
-npm run build:all   # Build all packages
-npm run clean:all   # Clean all build artifacts
+pnpm generate       # Generate all packages from templates
+pnpm verify         # Verify packages are up-to-date
+pnpm build:packages # Build all packages
+pnpm build:all      # Build all packages and example app
+pnpm clean:packages # Clean all build artifacts
 ```
 
 ## 🔧 Configuration Reference
@@ -190,9 +205,13 @@ Dmytro Koval
 ## 🤝 Contributing
 
 1. For core functionality changes, edit `packages/react-stats-map/`
-2. For template changes, edit `templates/` and regenerate
+2. For template changes, edit `templates/` and regenerate with `pnpm generate`
 3. For new maps, add to `config/maps.config.json` and regenerate
-4. Submit pull requests to the main repository
+4. Pre-commit hooks will verify packages are up-to-date before allowing commits
+5. CI will run automatically on pull requests to verify everything works
+6. Submit pull requests to the main repository
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
 
 ## 📊 Benefits of This Architecture
 

@@ -2,6 +2,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+const crypto = require('crypto');
 
 // Paths
 const ROOT_DIR = path.join(__dirname, '..');
@@ -155,7 +156,37 @@ mapsConfig.forEach((config) => {
   console.log(`  ✅ Package ${config.packageName} generated successfully!\n`);
 });
 
-console.log('🎉 All packages generated successfully!');
+// Save generation hash to track if regeneration is needed
+function getFileHash(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  return crypto.createHash('md5').update(content).digest('hex');
+}
+
+function getDirHash(dirPath, extension = null) {
+
+  const files = fs.readdirSync(dirPath)
+    .filter(f => !extension || f.endsWith(extension))
+    .sort();
+  
+  const combinedContent = files.map(f => {
+    const content = fs.readFileSync(path.join(dirPath, f), 'utf8');
+    return `${f}:${content}`;
+  }).join('\n');
+  
+  return crypto.createHash('md5').update(combinedContent).digest('hex');
+}
+
+const hashes = {
+  config: getFileHash(CONFIG_FILE),
+  templates: getDirHash(TEMPLATES_DIR, '.template'),
+  maps: getDirHash(MAPS_DIR, '.json')
+};
+
+const hashFile = path.join(ROOT_DIR, '.generation-hash');
+fs.writeFileSync(hashFile, JSON.stringify(hashes));
+console.log('  ✓ Saved generation hash');
+
+console.log('\n🎉 All packages generated successfully!');
 console.log('\n📝 Next steps:');
 console.log('  1. Run: pnpm install (to set up workspaces)');
 console.log('  2. Run: pnpm build:all (to build all packages)');

@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if templates, config, or maps have changed
+CHANGED_FILES=$(git diff --cached --name-only)
+
+# Check if any critical files that affect generation have changed
+if echo "$CHANGED_FILES" | grep -qE "^(templates/|config/maps\.config\.json|maps/.*\.json)"; then
+  echo "⚠️  Detected changes to templates, configuration, or map files"
+  echo "🔄 Verifying package generation status..."
+  
+  # Run verification script
+  if ! node scripts/verify-packages.js; then
+    echo ""
+    echo "❌ Pre-commit check failed!"
+    echo ""
+    echo "Templates, configuration, or map files have changed, but generated packages are out of date."
+    echo ""
+    echo "Please run the following command to regenerate packages:"
+    echo "  pnpm generate"
+    echo ""
+    echo "Then stage the changes and commit again:"
+    echo "  git add ."
+    echo "  git commit"
+    echo ""
+    exit 1
+  fi
+  
+  echo "✅ Package generation verification passed"
+else
+  echo "ℹ️  No template/config changes detected, skipping generation check"
+fi
+
+echo "✅ Pre-commit checks passed"
+
