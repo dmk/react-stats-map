@@ -18,17 +18,17 @@ export function getVoivodeshipCode(voivodeshipName: string): VoivodeshipCode | u
     'SL': ["slaskie", "silesian"],
     'PK': ["podkarpackie", "subcarpathian"],
     'WN': ["warminsko-mazurskie", "warmian-masurian"],
-    'ZP': ["zachodniopomorskie", "west pomeranian"],
+    'ZP': ["zachodniopomorskie", "west pomeranian"]
   };
 
   const normalizedVoivodeshipName = voivodeshipName
     .toLowerCase()
-    .replace(/[.,]/g, '') // Remove punctuation
+    .replace(/[.,]/g, '')
     .replace(/\s*([Ww]ojewództwo|[Vv]oivodeship|[Pp]rovince)\s*/g, '')
     .trim();
 
   return (
     Object.entries(voivodeshipMapping)
-      .find(([, names]) => names.includes(normalizedVoivodeshipName))?.[0]
+          .find(([, names]) => names.includes(normalizedVoivodeshipName))?.[0] 
   ) as VoivodeshipCode | undefined;
 }

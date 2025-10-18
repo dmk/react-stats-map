@@ -1,0 +1,24 @@
+# Mark generated files
+packages/react-ua-stats-map/src/** linguist-generated=true
+packages/react-ua-stats-map/package.json linguist-generated=true
+packages/react-ua-stats-map/rollup.config.js linguist-generated=true
+packages/react-ua-stats-map/tsconfig.json linguist-generated=true
+packages/react-ua-stats-map/README.md linguist-generated=true
+
+packages/react-pl-stats-map/src/** linguist-generated=true
+packages/react-pl-stats-map/package.json linguist-generated=true
+packages/react-pl-stats-map/rollup.config.js linguist-generated=true
+packages/react-pl-stats-map/tsconfig.json linguist-generated=true
+packages/react-pl-stats-map/README.md linguist-generated=true
+
+packages/react-md-stats-map/src/** linguist-generated=true
+packages/react-md-stats-map/package.json linguist-generated=true
+packages/react-md-stats-map/rollup.config.js linguist-generated=true
+packages/react-md-stats-map/tsconfig.json linguist-generated=true
+packages/react-md-stats-map/README.md linguist-generated=true
+
+packages/react-eu-stats-map/src/** linguist-generated=true
+packages/react-eu-stats-map/package.json linguist-generated=true
+packages/react-eu-stats-map/rollup.config.js linguist-generated=true
+packages/react-eu-stats-map/tsconfig.json linguist-generated=true
+packages/react-eu-stats-map/README.md linguist-generated=true

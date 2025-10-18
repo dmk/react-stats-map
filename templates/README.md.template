@@ -1,33 +1,33 @@
-# @dkkoval/react-pl-stats-map
+# {{PACKAGE_NAME}}
 
-A React component for visualizing data on a map of Poland by voivodeship.
+{{DESCRIPTION}}
 
 ## Installation
 
 ```bash
-npm install @dkkoval/react-pl-stats-map
+npm install {{PACKAGE_NAME}}
 # or
-yarn add @dkkoval/react-pl-stats-map
+yarn add {{PACKAGE_NAME}}
 ```
 
 ## Usage
 
 ```tsx
-import PLMap from '@dkkoval/react-pl-stats-map';
-import { VoivodeshipCode } from '@dkkoval/react-pl-stats-map';
+import {{COMPONENT_NAME}} from '{{PACKAGE_NAME}}';
+import { {{REGION_CODE_TYPE}} } from '{{PACKAGE_NAME}}';
 
 function App() {
-  const data: Record<VoivodeshipCode, number> = {
+  const data: Record<{{REGION_CODE_TYPE}}, number> = {
     // Your data here
   };
 
   return (
-    <PLMap
+    <{{COMPONENT_NAME}}
       width={800}
       height={600}
       data={data}
       valueName="Population"
-      title="Poland Statistics"
+      title="{{NAME}} Statistics"
     />
   );
 }
@@ -39,7 +39,7 @@ function App() {
 
 - `width`: number - Width of the map component
 - `height`: number - Height of the map component
-- `data`: Record<VoivodeshipCode, number> - Statistical data for each region
+- `data`: Record<{{REGION_CODE_TYPE}}, number> - Statistical data for each region
 - `valueName`: string - Name of the value being displayed
 - `title`: string - Title of the map
 - `hideLegend?`: boolean - Whether to hide the legend (default: false)

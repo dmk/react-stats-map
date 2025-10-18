@@ -1,0 +1,14 @@
+import { {{REGION_CODE_TYPE}} } from './types';
+
+// Helper function to convert {{REGION_TYPE_LOWER}} names to codes
+export function {{HELPER_FUNCTION_NAME}}({{REGION_TYPE_LOWER}}Name: string): {{REGION_CODE_TYPE}} | undefined {
+  const {{REGION_TYPE_LOWER}}Mapping: Record<{{REGION_CODE_TYPE}}, string[]> = {{MAPPING_OBJECT}};
+
+  const normalized{{REGION_TYPE}}Name = {{REGION_TYPE_LOWER}}Name
+    {{NORMALIZATION_CHAIN}};
+
+  return (
+    Object.entries({{REGION_TYPE_LOWER}}Mapping)
+          .find(([, names]) => names.includes(normalized{{REGION_TYPE}}Name))?.[0] 
+  ) as {{REGION_CODE_TYPE}} | undefined;
+}

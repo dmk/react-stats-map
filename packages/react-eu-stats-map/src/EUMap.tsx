@@ -1,14 +1,15 @@
-import * as topojson from 'topojson-client';
+import React from 'react';
+import { feature } from 'topojson-client';
 
 import { CountryCode } from '@/types';
 
 import topology from './assets/maps/eu.json';
 import StatsMap, { MapStyle, ThresholdColor } from '@dkkoval/react-stats-map';
 
-const { features } = topojson.feature(
-  topology,
-  topology.objects.europe
-) as topojson.FeatureCollection;
+const { features } = feature(
+  topology as any,
+  topology.objects.europe as any
+) as any;
 
 export interface EUMapProps {
   width: number;
