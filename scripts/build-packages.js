@@ -8,13 +8,15 @@ const packages = [
   'react-ua-stats-map',
   'react-md-stats-map',
   'react-pl-stats-map',
-  'react-eu-stats-map'
+  'react-eu-stats-map',
+  'react-fr-stats-map',
+  'react-world-stats-map'
 ];
 
 function buildPackage(packageName) {
   const packagePath = path.join(__dirname, '..', 'packages', packageName);
   console.log(`\n📦 Building ${packageName}...`);
-  
+
   try {
     execSync('pnpm build', {
       cwd: packagePath,

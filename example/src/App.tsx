@@ -5,6 +5,7 @@ import MDMap from '@dkkoval/react-md-stats-map';
 import PLMap from '@dkkoval/react-pl-stats-map';
 import EUMap from '@dkkoval/react-eu-stats-map';
 import FRMap from '@dkkoval/react-fr-stats-map';
+import WorldMap from '@dkkoval/react-world-stats-map';
 
 import uaPopulationJson from './data/ua/population.json';
 import uaJsonEditorSchema from './data/ua/data-schema.json';
@@ -21,10 +22,13 @@ import euJsonEditorSchema from './data/eu/data-schema.json';
 import frPopulationJson from './data/fr/population.json';
 import frJsonEditorSchema from './data/fr/data-schema.json';
 
-import { transformEUDataKeys, transformFRDataKeys, transformMDDataKeys, transformPLDataKeys, transformUADataKeys } from './utils/transformers';
+import worldPopulationJson from './data/world/population.json';
+import worldJsonEditorSchema from './data/world/data-schema.json';
+
+import { transformEUDataKeys, transformFRDataKeys, transformMDDataKeys, transformPLDataKeys, transformUADataKeys, transformWorldDataKeys } from './utils/transformers';
 import Playground from './components/Playground';
 
-export type Country = 'Ukraine' | 'Moldova' | 'Poland' | 'Europe' | 'France';
+export type Country = 'Ukraine' | 'Moldova' | 'Poland' | 'Europe' | 'France' | 'World';
 
 export const mapSettings: Record<Country, any> = {
   'Ukraine': {
@@ -75,6 +79,16 @@ export const mapSettings: Record<Country, any> = {
       initialData: frPopulationJson.data,
       jsonEditorSchema: frJsonEditorSchema,
       dataKeysTransformer: transformFRDataKeys,
+    }
+  },
+  'World': {
+    mapComponent: WorldMap,
+    providerProps: {
+      initialTitle: worldPopulationJson.title,
+      initialValueName: worldPopulationJson.valueName,
+      initialData: worldPopulationJson.data,
+      jsonEditorSchema: worldJsonEditorSchema,
+      dataKeysTransformer: transformWorldDataKeys,
     }
   },
 }

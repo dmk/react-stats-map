@@ -6,9 +6,10 @@ import { UAMapProps } from '@dkkoval/react-ua-stats-map';
 import { PLMapProps } from '@dkkoval/react-pl-stats-map';
 import { EUMapProps } from '@dkkoval/react-eu-stats-map';
 import { FRMapProps } from '@dkkoval/react-fr-stats-map';
+import { WorldMapProps } from '@dkkoval/react-world-stats-map';
 
 interface MapContainerProps {
-  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps | FRMapProps>;
+  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps | FRMapProps | WorldMapProps>;
 }
 
 const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
@@ -32,7 +33,7 @@ const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
           if (width === 0 || height === 0) {
             return null;
           }
-          
+
           return (
             <MapComponent
               {...{ width, height }}

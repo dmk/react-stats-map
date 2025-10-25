@@ -231948,9 +231948,7 @@ function StatsMap(_a) {
             color: defaultColors[i],
         }); });
     }, [maxValue]);
-    var usedThresholdColors = thresholdColors || defaultThresholdColors;
-    // Ensure thresholds are sorted in ascending order
-    usedThresholdColors.sort(function (a, b) { return a.threshold - b.threshold; });
+    var usedThresholdColors = (thresholdColors || defaultThresholdColors).slice().sort(function (a, b) { return a.threshold - b.threshold; });
     // Extract thresholds and colors from the array
     var usedThresholds = usedThresholdColors.map(function (tc) { return tc.threshold; });
     var usedColors = usedThresholdColors.map(function (tc) { return tc.color; });
