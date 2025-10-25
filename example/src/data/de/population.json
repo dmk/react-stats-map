@@ -1,0 +1,23 @@
+{
+  "title": "Population of Germany, 2024, millions",
+  "valueName": "millions",
+  "data": {
+    "Baden-Württemberg": 11.28,
+    "Bayern": 13.37,
+    "Berlin": 3.76,
+    "Brandenburg": 2.57,
+    "Bremen": 0.68,
+    "Hamburg": 1.90,
+    "Hessen": 6.41,
+    "Mecklenburg-Vorpommern": 1.61,
+    "Niedersachsen": 8.14,
+    "Nordrhein-Westfalen": 18.14,
+    "Rheinland-Pfalz": 4.16,
+    "Saarland": 0.98,
+    "Sachsen": 4.09,
+    "Sachsen-Anhalt": 2.16,
+    "Schleswig-Holstein": 2.96,
+    "Thüringen": 2.10
+  }
+}
+

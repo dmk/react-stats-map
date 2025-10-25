@@ -4,6 +4,7 @@ import { getVoivodeshipCode, VoivodeshipCode } from "@dkkoval/react-pl-stats-map
 import { getCountryCode, CountryCode } from "@dkkoval/react-eu-stats-map";
 import { getRegionCode, RegionCode } from "@dkkoval/react-fr-stats-map";
 import { getCountryCode as getWorldCountryCode, CountryCode as WorldCountryCode } from "@dkkoval/react-world-stats-map";
+import { getStateCode, StateCode } from "@dkkoval/react-de-stats-map";
 
 export function transformUADataKeys(data: Record<string, number>): Record<OblastCode, number> {
   const transformedData: Partial<Record<OblastCode, number>> = {};
@@ -81,4 +82,17 @@ export function transformWorldDataKeys(data: Record<string, number>): Record<Wor
   });
 
   return transformedData as Record<WorldCountryCode, number>;
+}
+
+export function transformDEDataKeys(data: Record<string, number>): Record<StateCode, number> {
+  const transformedData: Partial<Record<StateCode, number>> = {};
+
+  Object.entries(data).forEach(([key, value]) => {
+    const code = getStateCode(key);
+    if (code) {
+      transformedData[code] = value;
+    }
+  });
+
+  return transformedData as Record<StateCode, number>;
 }
