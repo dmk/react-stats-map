@@ -1,0 +1,8 @@
+---
+description: Packages
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"]
+alwaysApply: false
+---
+- Never edit packages/react-*-stats-map/ (auto-generated)
+- Only edit packages/react-stats-map/ (core package)
+- Edit templates/ instead, then run `pnpm generate`
