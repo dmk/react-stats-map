@@ -1,17 +1,36 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 
-const packages = [
-  'react-stats-map',      // Base package must be built first
-  'react-ua-stats-map',
-  'react-md-stats-map',
-  'react-pl-stats-map',
-  'react-eu-stats-map',
-  'react-fr-stats-map',
-  'react-world-stats-map'
-];
+/**
+ * Discovers all packages in the packages directory
+ * Ensures base package (react-stats-map) is built first
+ */
+function discoverPackages() {
+  const packagesDir = path.join(__dirname, '..', 'packages');
+  const basePackage = 'react-stats-map';
+
+  if (!fs.existsSync(packagesDir)) {
+    console.error('❌ Packages directory not found!');
+    process.exit(1);
+  }
+
+  const allPackages = fs.readdirSync(packagesDir)
+    .filter(name => {
+      const packagePath = path.join(packagesDir, name);
+      return fs.statSync(packagePath).isDirectory() &&
+             fs.existsSync(path.join(packagePath, 'package.json'));
+    });
+
+  // Sort packages: base package first, then alphabetically
+  const otherPackages = allPackages
+    .filter(pkg => pkg !== basePackage)
+    .sort();
+
+  return [basePackage, ...otherPackages];
+}
 
 function buildPackage(packageName) {
   const packagePath = path.join(__dirname, '..', 'packages', packageName);
@@ -31,6 +50,9 @@ function buildPackage(packageName) {
 }
 
 console.log('🚀 Building all packages...\n');
+
+const packages = discoverPackages();
+console.log(`📋 Found ${packages.length} package(s): ${packages.join(', ')}\n`);
 
 let allSuccessful = true;
 for (const pkg of packages) {

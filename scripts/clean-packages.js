@@ -1,22 +1,37 @@
 #!/usr/bin/env node
 
 const { execSync } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 
-const packages = [
-  'react-stats-map',
-  'react-ua-stats-map',
-  'react-md-stats-map',
-  'react-pl-stats-map',
-  'react-eu-stats-map'
-];
+/**
+ * Discovers all packages in the packages directory
+ */
+function discoverPackages() {
+  const packagesDir = path.join(__dirname, '..', 'packages');
+
+  if (!fs.existsSync(packagesDir)) {
+    console.error('❌ Packages directory not found!');
+    process.exit(1);
+  }
+
+  const allPackages = fs.readdirSync(packagesDir)
+    .filter(name => {
+      const packagePath = path.join(packagesDir, name);
+      return fs.statSync(packagePath).isDirectory() &&
+             fs.existsSync(path.join(packagePath, 'package.json'));
+    })
+    .sort();
+
+  return allPackages;
+}
 
 function cleanPackage(packageName) {
   const packagePath = path.join(__dirname, '..', 'packages', packageName);
   console.log(`🧹 Cleaning ${packageName}...`);
-  
+
   try {
-    execSync('yarn clean', {
+    execSync('pnpm clean', {
       cwd: packagePath,
       stdio: 'inherit'
     });
@@ -29,6 +44,9 @@ function cleanPackage(packageName) {
 }
 
 console.log('🧹 Cleaning all packages...\n');
+
+const packages = discoverPackages();
+console.log(`📋 Found ${packages.length} package(s): ${packages.join(', ')}\n`);
 
 for (const pkg of packages) {
   cleanPackage(pkg);
