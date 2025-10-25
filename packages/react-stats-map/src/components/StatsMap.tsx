@@ -97,10 +97,7 @@ export function StatsMap({
     }));
   }, [maxValue]);
 
-  const usedThresholdColors = thresholdColors || defaultThresholdColors;
-
-  // Ensure thresholds are sorted in ascending order
-  usedThresholdColors.sort((a, b) => a.threshold - b.threshold);
+  const usedThresholdColors = (thresholdColors || defaultThresholdColors).slice().sort((a, b) => a.threshold - b.threshold);
 
   // Extract thresholds and colors from the array
   const usedThresholds = usedThresholdColors.map(tc => tc.threshold);
