@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useMapSettings } from '../../MapSettingsContext';
 import { ThresholdColor } from '@dkkoval/react-stats-map';
 
@@ -20,9 +20,11 @@ const ThresholdOptions = () => {
     return thresholdColors;
   }, [thresholdColors, maxValue]);
 
-  if (!setThresholdColors) {
-    throw new Error('setThresholdColors must be defined in MapSettingsContext');
-  }
+  useEffect(() => {
+    if (!thresholdColors && setThresholdColors) {
+      setThresholdColors(defaultThresholdColors);
+    }
+  }, [thresholdColors, setThresholdColors, defaultThresholdColors]);
 
   const handleThresholdChange = (index: number, newThreshold: number) => {
     if (!thresholdColors) return;
@@ -54,9 +56,7 @@ const ThresholdOptions = () => {
     setThresholdColors(updatedThresholdColors);
   };
 
-  if (!thresholdColors && setThresholdColors) {
-    setThresholdColors(defaultThresholdColors);
-  }
+
 
   return (
     <div>
