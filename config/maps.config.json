@@ -281,6 +281,48 @@
     "keywords": ["react", "typescript", "map", "france", "d3", "visx", "data-visualisation"]
   },
   {
+    "id": "de",
+    "name": "Germany",
+    "packageName": "@dkkoval/react-de-stats-map",
+    "componentName": "DEMap",
+    "propsName": "DEMapProps",
+    "geojsonFile": "de-adm1.json",
+    "topojsonObject": "germany",
+    "regionType": "State",
+    "regionCodeType": "StateCode",
+    "regionCodes": [
+      "DE-BW", "DE-BY", "DE-BE", "DE-BB", "DE-HB", "DE-HH", "DE-HE", "DE-MV", "DE-NI", "DE-NW", "DE-RP", "DE-SL", "DE-SN", "DE-ST", "DE-SH", "DE-TH"
+    ],
+    "accessors": {
+      "name": "properties?.name",
+      "code": "properties?.id"
+    },
+    "helperFunction": {
+      "name": "getStateCode",
+      "mapping": {
+        "DE-BW": ["baden-württemberg", "baden-wurttemberg", "baden wurttemberg"],
+        "DE-BY": ["bayern", "bavaria"],
+        "DE-BE": ["berlin"],
+        "DE-BB": ["brandenburg"],
+        "DE-HB": ["bremen"],
+        "DE-HH": ["hamburg"],
+        "DE-HE": ["hessen", "hesse"],
+        "DE-MV": ["mecklenburg-vorpommern", "mecklenburg vorpommern"],
+        "DE-NI": ["niedersachsen", "lower saxony"],
+        "DE-NW": ["nordrhein-westfalen", "nordrhein westfalen", "north rhine-westphalia"],
+        "DE-RP": ["rheinland-pfalz", "rheinland pfalz", "rhineland-palatinate"],
+        "DE-SL": ["saarland"],
+        "DE-SN": ["sachsen", "saxony"],
+        "DE-ST": ["sachsen-anhalt", "sachsen anhalt", "saxony-anhalt"],
+        "DE-SH": ["schleswig-holstein", "schleswig holstein"],
+        "DE-TH": ["thüringen", "thuringen", "thuringia"]
+      },
+      "normalization": "toLowerCase().replace(/[.,]/g, '').replace(/\\s*(land|state|bundesland)\\s*/g, '').trim()"
+    },
+    "description": "A React component for visualizing data on a map of Germany by state.",
+    "keywords": ["react", "typescript", "map", "germany", "d3", "visx", "data-visualisation"]
+  },
+  {
     "id": "world",
     "name": "World",
     "packageName": "@dkkoval/react-world-stats-map",
