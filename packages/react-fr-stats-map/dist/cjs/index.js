@@ -6,12 +6,12 @@ var React = require('react');
 var jsxRuntime = require('react/jsx-runtime');
 var ReactDOM = require('react-dom');
 
-function identity$2(x) {
+function identity$1(x) {
   return x;
 }
 
 function transform(transform) {
-  if (transform == null) return identity$2;
+  if (transform == null) return identity$1;
   var x0,
       y0,
       kx = transform.scale[0],
@@ -217301,7 +217301,7 @@ function useMotionRef(visualState, visualElement, externalRef) {
                 externalRef.current = instance;
             }
         }
-    }, 
+    },
     /**
      * Only pass a new ref callback to React if we've received a visual element
      * factory. Otherwise we'll be mounting/remounting every time externalRef
@@ -217758,9 +217758,9 @@ const transformPropOrder = [
 const transformProps = new Set(transformPropOrder);
 
 const checkStringStartsWith = (token) => (key) => typeof key === "string" && key.startsWith(token);
-const isCSSVariableName = 
+const isCSSVariableName =
 /*@__PURE__*/ checkStringStartsWith("--");
-const startsAsVariableToken = 
+const startsAsVariableToken =
 /*@__PURE__*/ checkStringStartsWith("var(--");
 const isCSSVariableToken = (value) => {
     const startsWithToken = startsAsVariableToken(value);
@@ -218061,7 +218061,7 @@ function calcSVGTransformOrigin(dimensions, originX, originY) {
 /**
  * Build SVG visual attrbutes, like cx and style.transform
  */
-function buildSVGAttrs(state, { attrX, attrY, attrScale, originX, originY, pathLength, pathSpacing = 1, pathOffset = 0, 
+function buildSVGAttrs(state, { attrX, attrY, attrScale, originX, originY, pathLength, pathSpacing = 1, pathOffset = 0,
 // This is object creation, which we try to avoid per-frame.
 ...latest }, isSVGTag, transformTemplate) {
     buildHTMLStyles(state, latest, transformTemplate);
@@ -219295,7 +219295,7 @@ function getOptimisedAppearId(visualElement) {
   This has been modified from Gaëtan Renaudeau's BezierEasing
   https://github.com/gre/bezier-easing/blob/master/src/index.js
   https://github.com/gre/bezier-easing/blob/master/LICENSE
-  
+
   I've removed the newtonRaphsonIterate algo because in benchmarking it
   wasn't noticiably faster than binarySubdivision, indeed removing it
   usually improved times, depending on the curve.
@@ -219899,7 +219899,7 @@ const isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v);
  *
  * @param current
  */
-const splitCSSVariableRegex = 
+const splitCSSVariableRegex =
 // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
 /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
 function parseCSSVariable(current) {
@@ -223786,7 +223786,7 @@ const asNumber = (value) => typeof value === "string" ? parseFloat(value) : valu
 const isPx = (value) => typeof value === "number" || px.test(value);
 function mixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
     if (shouldCrossfadeOpacity) {
-        target.opacity = mixNumber$1(0, 
+        target.opacity = mixNumber$1(0,
         // TODO Reinstate this if only child
         lead.opacity !== undefined ? lead.opacity : 1, easeCrossfadeIn(progress));
         target.opacityExit = mixNumber$1(follow.opacity !== undefined ? follow.opacity : 1, 0, easeCrossfadeOut(progress));
@@ -228060,12 +228060,12 @@ function createThresholdScale(config) {
   return updateThresholdScale(threshold(), config);
 }
 
-var _excluded$7 = ["tooltipOpen"];
-function _objectWithoutPropertiesLoose$7(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-function _extends$b() { _extends$b = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$b.apply(this, arguments); }
+var _excluded$4 = ["tooltipOpen"];
+function _objectWithoutPropertiesLoose$4(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+function _extends$5() { _extends$5 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$5.apply(this, arguments); }
 function useTooltip( /** Optional initial TooltipState. */
 initialTooltipState) {
-  var _useState = React.useState(_extends$b({
+  var _useState = React.useState(_extends$5({
       tooltipOpen: false
     }, initialTooltipState)),
     tooltipState = _useState[0],
@@ -228073,8 +228073,8 @@ initialTooltipState) {
   var showTooltip = React.useCallback(function (showArgs) {
     return setTooltipState(typeof showArgs === 'function' ? function (_ref) {
       _ref.tooltipOpen;
-        var show = _objectWithoutPropertiesLoose$7(_ref, _excluded$7);
-      return _extends$b({}, showArgs(show), {
+        var show = _objectWithoutPropertiesLoose$4(_ref, _excluded$4);
+      return _extends$5({}, showArgs(show), {
         tooltipOpen: true
       });
     } : {
@@ -229362,11 +229362,11 @@ function requireClassnames () {
 				if (!newClass) {
 					return value;
 				}
-			
+
 				if (value) {
 					return value + ' ' + newClass;
 				}
-			
+
 				return value + newClass;
 			}
 
@@ -229376,7 +229376,7 @@ function requireClassnames () {
 			} else {
 				window.classNames = classNames;
 			}
-		}()); 
+		}());
 	} (classnames));
 	return classnames.exports;
 }
@@ -229384,9 +229384,9 @@ function requireClassnames () {
 var classnamesExports = requireClassnames();
 var cx = /*@__PURE__*/getDefaultExportFromCjs(classnamesExports);
 
-var _excluded$6 = ["className", "top", "left", "offsetLeft", "offsetTop", "style", "children", "unstyled", "applyPositionStyle"];
-function _extends$a() { _extends$a = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$a.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$6(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+var _excluded$3 = ["className", "top", "left", "offsetLeft", "offsetTop", "style", "children", "unstyled", "applyPositionStyle"];
+function _extends$4() { _extends$4 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
+function _objectWithoutPropertiesLoose$3(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 var defaultStyles = {
   position: 'absolute',
   backgroundColor: 'white',
@@ -229413,11 +229413,11 @@ var Tooltip = /*#__PURE__*/React.forwardRef(function (_ref, ref) {
     unstyled = _ref$unstyled === void 0 ? false : _ref$unstyled,
     _ref$applyPositionSty = _ref.applyPositionStyle,
     applyPositionStyle = _ref$applyPositionSty === void 0 ? false : _ref$applyPositionSty,
-    restProps = _objectWithoutPropertiesLoose$6(_ref, _excluded$6);
-  return /*#__PURE__*/React.createElement("div", _extends$a({
+    restProps = _objectWithoutPropertiesLoose$3(_ref, _excluded$3);
+  return /*#__PURE__*/React.createElement("div", _extends$4({
     ref: ref,
     className: cx('visx-tooltip', className),
-    style: _extends$a({
+    style: _extends$4({
       top: top == null || offsetTop == null ? top : top + offsetTop,
       left: left == null || offsetLeft == null ? left : left + offsetLeft
     }, applyPositionStyle && {
@@ -229437,7 +229437,7 @@ Tooltip.propTypes = {
 };
 Tooltip.displayName = 'Tooltip';
 
-function _extends$9() { _extends$9 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$9.apply(this, arguments); }
+function _extends$3() { _extends$3 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -229485,7 +229485,7 @@ function withBoundingRects(BaseComponent) {
       };
     };
     _proto.render = function render() {
-      return /*#__PURE__*/React.createElement(BaseComponent, _extends$9({
+      return /*#__PURE__*/React.createElement(BaseComponent, _extends$3({
         nodeRef: this.nodeRef,
         getRects: this.getRects
       }, this.state, this.props));
@@ -229501,9 +229501,9 @@ var TooltipPositionContext = /*#__PURE__*/React.createContext({
 var TooltipPositionProvider = TooltipPositionContext.Provider;
 TooltipPositionContext.Consumer;
 
-var _excluded$5 = ["children", "getRects", "left", "offsetLeft", "offsetTop", "parentRect", "rect", "style", "top", "unstyled", "nodeRef"];
-function _extends$8() { _extends$8 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$8.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$5(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+var _excluded$2 = ["children", "getRects", "left", "offsetLeft", "offsetTop", "parentRect", "rect", "style", "top", "unstyled", "nodeRef"];
+function _extends$2() { _extends$2 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
+function _objectWithoutPropertiesLoose$2(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function TooltipWithBounds(_ref) {
   var children = _ref.children;
     _ref.getRects;
@@ -229522,7 +229522,7 @@ function TooltipWithBounds(_ref) {
     _ref$unstyled = _ref.unstyled,
     unstyled = _ref$unstyled === void 0 ? false : _ref$unstyled,
     nodeRef = _ref.nodeRef,
-    otherProps = _objectWithoutPropertiesLoose$5(_ref, _excluded$5);
+    otherProps = _objectWithoutPropertiesLoose$2(_ref, _excluded$2);
   var transform;
   var placeTooltipLeft = false;
   var placeTooltipUp = false;
@@ -229551,9 +229551,9 @@ function TooltipWithBounds(_ref) {
     top = Math.round(top);
     transform = "translate(" + left + "px, " + top + "px)";
   }
-  return /*#__PURE__*/React.createElement(Tooltip, _extends$8({
+  return /*#__PURE__*/React.createElement(Tooltip, _extends$2({
     ref: nodeRef,
-    style: _extends$8({
+    style: _extends$2({
       left: 0,
       top: 0,
       transform: transform
@@ -230630,7 +230630,7 @@ function clipRectangle(x0, y0, x1, y1) {
   };
 }
 
-var identity$1 = x => x;
+var identity = x => x;
 
 var areaSum = new Adder(),
     areaRingSum = new Adder(),
@@ -231005,7 +231005,7 @@ function geoPath(projection, context) {
 
   path.projection = function(_) {
     if (!arguments.length) return projection;
-    projectionStream = _ == null ? (projection = null, identity$1) : (projection = _).stream;
+    projectionStream = _ == null ? (projection = null, identity) : (projection = _).stream;
     return path;
   };
 
@@ -231262,7 +231262,7 @@ function projectionMutator(projectAt) {
       sx = 1, // reflectX
       sy = 1, // reflectX
       theta = null, preclip = clipAntimeridian, // pre-clip angle
-      x0 = null, y0, x1, y1, postclip = identity$1, // post-clip extent
+      x0 = null, y0, x1, y1, postclip = identity, // post-clip extent
       delta2 = 0.5, // precision
       projectResample,
       projectTransform,
@@ -231296,7 +231296,7 @@ function projectionMutator(projectAt) {
   };
 
   projection.clipExtent = function(_) {
-    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity$1) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
   };
 
   projection.scale = function(_) {
@@ -231591,9 +231591,9 @@ function mercatorProjection(project) {
   return reclip();
 }
 
-var _excluded$4 = ["flexDirection", "alignItems", "margin", "display", "children"];
-function _extends$7() { _extends$7 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$7.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$4(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+var _excluded$1 = ["flexDirection", "alignItems", "margin", "display", "children"];
+function _extends$1() { _extends$1 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
+function _objectWithoutPropertiesLoose$1(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function LegendItem(_ref) {
   var _ref$flexDirection = _ref.flexDirection,
     flexDirection = _ref$flexDirection === void 0 ? 'row' : _ref$flexDirection,
@@ -231604,8 +231604,8 @@ function LegendItem(_ref) {
     _ref$display = _ref.display,
     display = _ref$display === void 0 ? 'flex' : _ref$display,
     children = _ref.children,
-    restProps = _objectWithoutPropertiesLoose$4(_ref, _excluded$4);
-  return /*#__PURE__*/React.createElement("div", _extends$7({
+    restProps = _objectWithoutPropertiesLoose$1(_ref, _excluded$1);
+  return /*#__PURE__*/React.createElement("div", _extends$1({
     className: "visx-legend-item",
     style: {
       display: display,
@@ -231622,9 +231622,9 @@ LegendItem.propTypes = {
   display: _pt.string
 };
 
-var _excluded$3 = ["flex", "label", "margin", "align", "children"];
-function _extends$6() { _extends$6 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$6.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$3(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+var _excluded = ["flex", "label", "margin", "align", "children"];
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 function LegendLabel(_ref) {
   var _ref$flex = _ref.flex,
     flex = _ref$flex === void 0 ? '1' : _ref$flex,
@@ -231634,8 +231634,8 @@ function LegendLabel(_ref) {
     _ref$align = _ref.align,
     align = _ref$align === void 0 ? 'left' : _ref$align,
     children = _ref.children,
-    restProps = _objectWithoutPropertiesLoose$3(_ref, _excluded$3);
-  return /*#__PURE__*/React.createElement("div", _extends$6({
+    restProps = _objectWithoutPropertiesLoose(_ref, _excluded);
+  return /*#__PURE__*/React.createElement("div", _extends({
     className: "visx-legend-label",
     style: {
       justifyContent: align,
@@ -231653,411 +231653,40 @@ LegendLabel.propTypes = {
   children: _pt.node
 };
 
-function _extends$5() { _extends$5 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$5.apply(this, arguments); }
-function ShapeRect(_ref) {
-  var fill = _ref.fill,
-    width = _ref.width,
-    height = _ref.height,
-    style = _ref.style;
-  return /*#__PURE__*/React.createElement("div", {
-    style: _extends$5({
-      width: width,
-      height: height,
-      background: fill
-    }, style)
-  });
-}
-ShapeRect.propTypes = {
-  fill: _pt.string,
-  width: _pt.oneOfType([_pt.string, _pt.number]),
-  height: _pt.oneOfType([_pt.string, _pt.number])
-};
-
-var _excluded$2 = ["top", "left", "transform", "className", "children", "innerRef"];
-function _extends$4() { _extends$4 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$4.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$2(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-function Group(_ref) {
-  var _ref$top = _ref.top,
-    top = _ref$top === void 0 ? 0 : _ref$top,
-    _ref$left = _ref.left,
-    left = _ref$left === void 0 ? 0 : _ref$left,
-    transform = _ref.transform,
-    className = _ref.className,
-    children = _ref.children,
-    innerRef = _ref.innerRef,
-    restProps = _objectWithoutPropertiesLoose$2(_ref, _excluded$2);
-  return /*#__PURE__*/React.createElement("g", _extends$4({
-    ref: innerRef,
-    className: cx('visx-group', className),
-    transform: transform || "translate(" + left + ", " + top + ")"
-  }, restProps), children);
-}
-Group.propTypes = {
-  top: _pt.number,
-  left: _pt.number,
-  transform: _pt.string,
-  className: _pt.string,
-  children: _pt.node,
-  innerRef: _pt.oneOfType([_pt.string, _pt.func, _pt.object])
-};
-
-function ShapeCircle(_ref) {
-  var fill = _ref.fill,
-    width = _ref.width,
-    height = _ref.height,
-    style = _ref.style;
-  var cleanWidth = typeof width === 'string' || typeof width === 'undefined' ? 0 : width;
-  var cleanHeight = typeof height === 'string' || typeof height === 'undefined' ? 0 : height;
-  var size = Math.max(cleanWidth, cleanHeight);
-  var radius = size / 2;
-  return /*#__PURE__*/React.createElement("svg", {
-    width: size,
-    height: size
-  }, /*#__PURE__*/React.createElement(Group, {
-    top: radius,
-    left: radius
-  }, /*#__PURE__*/React.createElement("circle", {
-    r: radius,
-    fill: fill,
-    style: style
-  })));
-}
-ShapeCircle.propTypes = {
-  fill: _pt.string,
-  width: _pt.oneOfType([_pt.string, _pt.number]),
-  height: _pt.oneOfType([_pt.string, _pt.number])
-};
-
-function ShapeLine(_ref) {
-  var fill = _ref.fill,
-    width = _ref.width,
-    height = _ref.height,
-    style = _ref.style;
-  var cleanHeight = typeof height === 'string' || typeof height === 'undefined' ? 0 : height;
-  var lineThickness = typeof (style == null ? void 0 : style.strokeWidth) === 'number' ? style == null ? void 0 : style.strokeWidth : 2;
-  return /*#__PURE__*/React.createElement("svg", {
-    width: width,
-    height: height
-  }, /*#__PURE__*/React.createElement(Group, {
-    top: cleanHeight / 2 - lineThickness / 2
-  }, /*#__PURE__*/React.createElement("line", {
-    x1: 0,
-    x2: width,
-    y1: 0,
-    y2: 0,
-    stroke: fill,
-    strokeWidth: lineThickness,
-    style: style
-  })));
-}
-ShapeLine.propTypes = {
-  fill: _pt.string,
-  width: _pt.oneOfType([_pt.string, _pt.number]),
-  height: _pt.oneOfType([_pt.string, _pt.number])
-};
-
-function _extends$3() { _extends$3 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$3.apply(this, arguments); }
-var NO_OP = function NO_OP() {
-  return undefined;
-};
-function renderShape(_ref) {
-  var _ref$shape = _ref.shape,
-    shape = _ref$shape === void 0 ? 'rect' : _ref$shape,
-    _ref$fill = _ref.fill,
-    fill = _ref$fill === void 0 ? NO_OP : _ref$fill,
-    _ref$size = _ref.size,
-    size = _ref$size === void 0 ? NO_OP : _ref$size,
-    width = _ref.width,
-    height = _ref.height,
-    label = _ref.label,
-    item = _ref.item,
-    itemIndex = _ref.itemIndex,
-    _ref$shapeStyle = _ref.shapeStyle,
-    shapeStyle = _ref$shapeStyle === void 0 ? NO_OP : _ref$shapeStyle;
-  var props = {
-    width: width,
-    height: height,
-    item: item,
-    itemIndex: itemIndex,
-    label: label,
-    fill: fill(_extends$3({}, label)),
-    size: size(_extends$3({}, label)),
-    style: shapeStyle(_extends$3({}, label))
-  };
-  if (typeof shape === 'string') {
-    if (shape === 'circle') {
-      return /*#__PURE__*/React.createElement(ShapeCircle, props);
+function formatNumber(value) {
+    // Format number to avoid floating point issues while preserving meaningful decimals
+    if (Math.abs(value - Math.round(value)) < 0.0001) {
+        return Math.round(value).toString();
     }
-    if (shape === 'line') {
-      return /*#__PURE__*/React.createElement(ShapeLine, props);
-    }
-    return /*#__PURE__*/React.createElement(ShapeRect, props);
-  }
-  if ( /*#__PURE__*/React.isValidElement(shape)) {
-    return /*#__PURE__*/React.cloneElement(shape, props);
-  }
-  if (shape) {
-    return /*#__PURE__*/React.createElement(shape, props);
-  }
-  return null;
+    // Use up to 3 decimal places, but remove trailing zeros
+    return value.toFixed(3).replace(/\.?0+$/, '');
 }
-
-function _extends$2() { _extends$2 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$2.apply(this, arguments); }
-function LegendShape(_ref) {
-  var _ref$shape = _ref.shape,
-    shape = _ref$shape === void 0 ? ShapeRect : _ref$shape,
-    width = _ref.width,
-    height = _ref.height,
-    margin = _ref.margin,
-    label = _ref.label,
-    item = _ref.item,
-    itemIndex = _ref.itemIndex,
-    fill = _ref.fill,
-    size = _ref.size,
-    shapeStyle = _ref.shapeStyle;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "visx-legend-shape",
-    style: {
-      display: 'flex',
-      width: size ? size(_extends$2({}, label)) : width,
-      height: size ? size(_extends$2({}, label)) : height,
-      margin: margin
-    }
-  }, renderShape({
-    shape: shape,
-    item: item,
-    itemIndex: itemIndex,
-    label: label,
-    width: width,
-    height: height,
-    fill: fill,
-    shapeStyle: shapeStyle
-  }));
-}
-LegendShape.propTypes = {
-  itemIndex: _pt.number.isRequired,
-  margin: _pt.oneOfType([_pt.string, _pt.number]),
-  width: _pt.oneOfType([_pt.string, _pt.number]),
-  height: _pt.oneOfType([_pt.string, _pt.number])
-};
-
-/** Returns an object's value if defined, or the object. */
-function valueOrIdentity(_) {
-  if (_ && typeof _ === 'object' && 'value' in _ && typeof _.value !== 'undefined') return _.value;
-  return _;
-}
-
-/** Returns an object's value if defined, or the object, coerced to a string. */
-function valueOrIdentityString(_) {
-  return String(valueOrIdentity(_));
-}
-
-/** Returns a function which takes a Datum and index as input, and returns a formatted label object. */
-function labelTransformFactory(_ref) {
-  var scale = _ref.scale,
-    labelFormat = _ref.labelFormat;
-  return function (d, i) {
-    return {
-      datum: d,
-      index: i,
-      text: "" + labelFormat(d, i),
-      value: scale(d)
-    };
-  };
-}
-
-var _excluded$1 = ["className", "style", "scale", "shape", "domain", "fill", "size", "labelFormat", "labelTransform", "shapeWidth", "shapeHeight", "shapeMargin", "shapeStyle", "labelAlign", "labelFlex", "labelMargin", "itemMargin", "direction", "itemDirection", "legendLabelProps", "children"];
-function _extends$1() { _extends$1 = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends$1.apply(this, arguments); }
-function _objectWithoutPropertiesLoose$1(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-var defaultStyle = {
-  display: 'flex'
-};
-function Legend(_ref) {
-  var className = _ref.className,
-    _ref$style = _ref.style,
-    style = _ref$style === void 0 ? defaultStyle : _ref$style,
-    scale = _ref.scale,
-    shape = _ref.shape,
-    inputDomain = _ref.domain,
-    _ref$fill = _ref.fill,
-    fill = _ref$fill === void 0 ? valueOrIdentityString : _ref$fill,
-    _ref$size = _ref.size,
-    size = _ref$size === void 0 ? valueOrIdentityString : _ref$size,
-    _ref$labelFormat = _ref.labelFormat,
-    labelFormat = _ref$labelFormat === void 0 ? valueOrIdentity : _ref$labelFormat,
-    _ref$labelTransform = _ref.labelTransform,
-    labelTransform = _ref$labelTransform === void 0 ? labelTransformFactory : _ref$labelTransform,
-    _ref$shapeWidth = _ref.shapeWidth,
-    shapeWidth = _ref$shapeWidth === void 0 ? 15 : _ref$shapeWidth,
-    _ref$shapeHeight = _ref.shapeHeight,
-    shapeHeight = _ref$shapeHeight === void 0 ? 15 : _ref$shapeHeight,
-    _ref$shapeMargin = _ref.shapeMargin,
-    shapeMargin = _ref$shapeMargin === void 0 ? '2px 4px 2px 0' : _ref$shapeMargin,
-    shapeStyle = _ref.shapeStyle,
-    _ref$labelAlign = _ref.labelAlign,
-    labelAlign = _ref$labelAlign === void 0 ? 'left' : _ref$labelAlign,
-    _ref$labelFlex = _ref.labelFlex,
-    labelFlex = _ref$labelFlex === void 0 ? '1' : _ref$labelFlex,
-    _ref$labelMargin = _ref.labelMargin,
-    labelMargin = _ref$labelMargin === void 0 ? '0 4px' : _ref$labelMargin,
-    _ref$itemMargin = _ref.itemMargin,
-    itemMargin = _ref$itemMargin === void 0 ? '0' : _ref$itemMargin,
-    _ref$direction = _ref.direction,
-    direction = _ref$direction === void 0 ? 'column' : _ref$direction,
-    _ref$itemDirection = _ref.itemDirection,
-    itemDirection = _ref$itemDirection === void 0 ? 'row' : _ref$itemDirection,
-    legendLabelProps = _ref.legendLabelProps,
-    children = _ref.children,
-    legendItemProps = _objectWithoutPropertiesLoose$1(_ref, _excluded$1);
-  // `Scale extends ScaleType` constraint is tricky
-  //  could consider removing `scale` altogether in the future and making `domain: Datum[]` required
-  var domain = inputDomain || ('domain' in scale ? scale.domain() : []);
-  var labelFormatter = labelTransform({
-    scale: scale,
-    labelFormat: labelFormat
-  });
-  var labels = domain.map(labelFormatter);
-  if (children) return /*#__PURE__*/React.createElement(React.Fragment, null, children(labels));
-  return /*#__PURE__*/React.createElement("div", {
-    className: cx('visx-legend', className),
-    style: _extends$1({}, style, {
-      flexDirection: direction
-    })
-  }, labels.map(function (label, i) {
-    return /*#__PURE__*/React.createElement(LegendItem, _extends$1({
-      key: "legend-" + label.text + "-" + i,
-      margin: itemMargin,
-      flexDirection: itemDirection
-    }, legendItemProps), /*#__PURE__*/React.createElement(LegendShape, {
-      shape: shape,
-      height: shapeHeight,
-      width: shapeWidth,
-      margin: shapeMargin,
-      item: domain[i],
-      itemIndex: i,
-      label: label,
-      fill: fill,
-      size: size,
-      shapeStyle: shapeStyle
-    }), /*#__PURE__*/React.createElement(LegendLabel, _extends$1({
-      label: label.text,
-      flex: labelFlex,
-      margin: labelMargin,
-      align: labelAlign
-    }, legendLabelProps)));
-  }));
-}
-Legend.propTypes = {
-  children: _pt.func,
-  className: _pt.string,
-  domain: _pt.array,
-  shapeWidth: _pt.oneOfType([_pt.string, _pt.number]),
-  shapeHeight: _pt.oneOfType([_pt.string, _pt.number]),
-  shapeMargin: _pt.oneOfType([_pt.string, _pt.number]),
-  labelAlign: _pt.string,
-  labelFlex: _pt.oneOfType([_pt.string, _pt.number]),
-  labelMargin: _pt.oneOfType([_pt.string, _pt.number]),
-  itemMargin: _pt.oneOfType([_pt.string, _pt.number]),
-  fill: _pt.func,
-  size: _pt.func,
-  shapeStyle: _pt.func
-};
-
-function identity(x) {
-  return x;
-}
-
-var _excluded = ["scale", "domain", "labelFormat", "labelTransform", "labelDelimiter", "labelLower", "labelUpper"];
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-var formatZero = function formatZero(label) {
-  return label === 0 ? '0' : label || '';
-};
-/** Default transform implicitly assumes that Datum is of type number. */
-function defaultTransform(_ref) {
-  var labelDelimiter = _ref.labelDelimiter,
-    labelLower = _ref.labelLower,
-    labelUpper = _ref.labelUpper;
-  return function (_ref2) {
-    var scale = _ref2.scale,
-      labelFormat = _ref2.labelFormat;
-    var scaleRange = scale.range();
-    return function (d, i) {
-      var _ref3 = scaleRange.length >= i ? scale.invertExtent(scaleRange[i]) : [undefined, undefined],
-        d0 = _ref3[0],
-        d1 = _ref3[1];
-      var delimiter = " " + labelDelimiter + " ";
-      var text = '';
-      var value;
-      if (d0 == null && typeof d1 === 'number') {
-        // lower threshold e.g., [undefined, number]
-        delimiter = labelLower || delimiter;
-        value = d1 - Math.abs(2 * d1 - 1); // guarantees a value smaller than the lower threshold
-        text = "" + delimiter + formatZero(labelFormat(d1, i));
-      } else if (d0 != null && d1 != null) {
-        // threshold step
-        value = d;
-        text = "" + formatZero(labelFormat(d0, i)) + delimiter + formatZero(labelFormat(d1, i));
-      } else if (typeof d0 === 'number' && d1 == null) {
-        // upper threshold e.g., [number, undefined]
-        delimiter = labelUpper || delimiter;
-        value = d0 + Math.abs(2 * d0 + 1); // // guarantees a value larger than the upper threshold
-        text = "" + delimiter + formatZero(labelFormat(d0, i));
-      }
-      return {
-        extent: [d0, d1],
-        value: scale(value),
-        text: text,
-        datum: d,
-        index: i
-      };
-    };
-  };
-}
-function Threshold(_ref4) {
-  var scale = _ref4.scale,
-    inputDomain = _ref4.domain,
-    _ref4$labelFormat = _ref4.labelFormat,
-    labelFormat = _ref4$labelFormat === void 0 ? identity : _ref4$labelFormat,
-    inputLabelTransform = _ref4.labelTransform,
-    _ref4$labelDelimiter = _ref4.labelDelimiter,
-    labelDelimiter = _ref4$labelDelimiter === void 0 ? 'to' : _ref4$labelDelimiter,
-    _ref4$labelLower = _ref4.labelLower,
-    labelLower = _ref4$labelLower === void 0 ? 'Less than ' : _ref4$labelLower,
-    _ref4$labelUpper = _ref4.labelUpper,
-    labelUpper = _ref4$labelUpper === void 0 ? 'More than ' : _ref4$labelUpper,
-    restProps = _objectWithoutPropertiesLoose(_ref4, _excluded);
-  // d3 docs specify that for n values in a domain, there should be n+1 values in the range
-  // https://github.com/d3/d3-scale#threshold_domain
-  // therefore if a domain is not specified we transform the range into input values
-  // because it should contain more elements
-
-  var domain = inputDomain || scale.range().map(function (output) {
-    return scale.invertExtent(output)[0];
-  });
-  var labelTransform = inputLabelTransform || defaultTransform({
-    labelDelimiter: labelDelimiter,
-    labelLower: labelLower,
-    labelUpper: labelUpper
-  });
-  return /*#__PURE__*/React.createElement(Legend, _extends({
-    scale: scale,
-    domain: domain,
-    labelFormat: labelFormat,
-    labelTransform: labelTransform
-  }, restProps));
-}
-Threshold.propTypes = {
-  labelDelimiter: _pt.string,
-  labelLower: _pt.string,
-  labelUpper: _pt.string
-};
-
 function StatsMapLegend(_a) {
     var width = _a.width, height = _a.height, colorScale = _a.colorScale;
+    var thresholds = colorScale.domain();
+    var colors = colorScale.range();
+    // Build legend entries with proper ranges
+    var legendEntries = [];
+    // Add entries for each color bucket
+    for (var i = 0; i < colors.length; i++) {
+        var label = void 0;
+        if (i === 0) {
+            // First bucket: "Less than X"
+            label = "Less than ".concat(formatNumber(thresholds[0]));
+        }
+        else if (i === colors.length - 1) {
+            // Last bucket: "More than X"
+            label = "More than ".concat(formatNumber(thresholds[thresholds.length - 1]));
+        }
+        else {
+            // Middle buckets: "X to Y"
+            label = "".concat(formatNumber(thresholds[i - 1]), " to ").concat(formatNumber(thresholds[i]));
+        }
+        legendEntries.push({
+            color: colors[i],
+            label: label,
+        });
+    }
     return (jsxRuntime.jsx("div", { style: {
             position: 'absolute',
             bottom: 0,
@@ -232067,14 +231696,14 @@ function StatsMapLegend(_a) {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-        }, children: jsxRuntime.jsx(Threshold, { scale: colorScale, children: function (labels) { return (jsxRuntime.jsx("div", { style: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '1.2rem',
-                }, children: labels.reverse().map(function (label, i) { return (jsxRuntime.jsxs(LegendItem, { children: [jsxRuntime.jsx("svg", { width: 18, height: 18, children: jsxRuntime.jsx("circle", { fill: label.value, r: 9, cx: 9, cy: 9 }) }), jsxRuntime.jsx(LegendLabel, { style: {
-                                fontSize: '0.875rem',
-                                marginLeft: '.5rem',
-                            }, children: label.text })] }, "legend-quantile-".concat(i))); }) })); } }) }));
+        }, children: jsxRuntime.jsx("div", { style: {
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '1.2rem',
+            }, children: legendEntries.reverse().map(function (entry, i) { return (jsxRuntime.jsxs(LegendItem, { children: [jsxRuntime.jsx("svg", { width: 18, height: 18, children: jsxRuntime.jsx("circle", { fill: entry.color, r: 9, cx: 9, cy: 9 }) }), jsxRuntime.jsx(LegendLabel, { style: {
+                            fontSize: '0.875rem',
+                            marginLeft: '.5rem',
+                        }, children: entry.label })] }, "legend-quantile-".concat(i))); }) }) }));
 }
 
 function StatsMapTitle(_a) {
@@ -232090,6 +231719,64 @@ function StatsMapTitle(_a) {
             fontWeight: 'bold',
             lineHeight: "".concat(height, "px"),
         }, children: title }));
+}
+/**
+ * Intelligently round a number to remove floating point precision issues
+ * while preserving meaningful decimal places.
+ */
+function smartRound(value) {
+    // If it's an integer or very close to one, return it as integer
+    if (Math.abs(value - Math.round(value)) < 0.0001) {
+        return Math.round(value);
+    }
+    // Determine appropriate decimal places based on magnitude
+    var magnitude = Math.abs(value);
+    var decimals = 2;
+    if (magnitude < 1) {
+        decimals = 3;
+    }
+    else if (magnitude < 10) {
+        decimals = 2;
+    }
+    else if (magnitude < 100) {
+        decimals = 1;
+    }
+    else {
+        decimals = 0;
+    }
+    return Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+/**
+ * Calculate quantile-based thresholds from data values.
+ * This ensures each bucket contains approximately the same number of data points,
+ * providing better distribution than equal-interval bucketing.
+ *
+ * @param dataValues - Array of numerical data values
+ * @param numberOfBuckets - Number of color buckets to create (default: 5)
+ * @returns Array of threshold values at quantile boundaries
+ */
+function calculateQuantileThresholds(dataValues, numberOfBuckets) {
+    if (numberOfBuckets === void 0) { numberOfBuckets = 5; }
+    // Filter out any undefined/null values and sort
+    var sortedValues = dataValues
+        .filter(function (val) { return val !== undefined && val !== null && !isNaN(val); })
+        .sort(function (a, b) { return a - b; });
+    if (sortedValues.length === 0) {
+        return [];
+    }
+    var thresholds = [];
+    // Calculate quantile positions
+    for (var i = 1; i < numberOfBuckets; i++) {
+        var quantile = i / numberOfBuckets;
+        var position = quantile * (sortedValues.length - 1);
+        var lower = Math.floor(position);
+        var upper = Math.ceil(position);
+        var weight = position - lower;
+        // Linear interpolation between values at floor and ceil positions
+        var threshold = sortedValues[lower] * (1 - weight) + sortedValues[upper] * weight;
+        thresholds.push(smartRound(threshold));
+    }
+    return thresholds;
 }
 
 function StatsMap(_a) {
@@ -232116,16 +231803,18 @@ function StatsMap(_a) {
     var pathGenerator = React.useMemo(function () { return geoPath().projection(projection); }, [
         projection,
     ]);
-    var maxValue = React.useMemo(function () { return Math.max.apply(Math, Object.values(data)); }, [data]);
+    React.useMemo(function () { return Math.max.apply(Math, Object.values(data)); }, [data]);
     // Default thresholds and colors if the user doesn't provide any
+    // Uses quantile-based bucketing to ensure equal distribution of data points across buckets
     var defaultThresholdColors = React.useMemo(function () {
-        var stepSize = maxValue / 5;
         var defaultColors = ['#34d399', '#10b981', '#059669', '#047857', '#065f46'];
-        return Array.from({ length: 5 }, function (_, i) { return ({
-            threshold: Math.round((i + 1) * stepSize),
+        var dataValues = Object.values(data);
+        var quantileThresholds = calculateQuantileThresholds(dataValues, defaultColors.length);
+        return quantileThresholds.map(function (threshold, i) { return ({
+            threshold: threshold,
             color: defaultColors[i],
         }); });
-    }, [maxValue]);
+    }, [data]);
     var usedThresholdColors = (thresholdColors || defaultThresholdColors).slice().sort(function (a, b) { return a.threshold - b.threshold; });
     // Extract thresholds and colors from the array
     var usedThresholds = usedThresholdColors.map(function (tc) { return tc.threshold; });
