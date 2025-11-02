@@ -100,9 +100,11 @@ export function StatsMap({
     const dataValues = Object.values(data);
     const quantileThresholds = calculateQuantileThresholds(dataValues, defaultColors.length);
 
+    // For scaleThreshold: N thresholds need N+1 colors
+    // Each threshold marks the start of the next color (colors[i+1])
     return quantileThresholds.map((threshold, i) => ({
       threshold,
-      color: defaultColors[i],
+      color: defaultColors[i + 1],
     }));
   }, [data]);
 
@@ -112,13 +114,15 @@ export function StatsMap({
   const usedThresholds = usedThresholdColors.map(tc => tc.threshold);
   const usedColors = usedThresholdColors.map(tc => tc.color);
 
-  // For scaleThreshold, the number of colors should be one more than the number of thresholds
-  // Include a color for values below the first threshold
+  // For scaleThreshold, we need N+1 colors for N thresholds
+  // Prepend the first color (for values below the first threshold)
   const colorScale = useMemo(
-    () =>
-      scaleThreshold<number, string>()
+    () => {
+      const allColors = ['#34d399', ...usedColors];
+      return scaleThreshold<number, string>()
         .domain(usedThresholds)
-        .range(usedColors),
+        .range(allColors);
+    },
     [usedThresholds, usedColors]
   );
 
@@ -177,7 +181,16 @@ export function StatsMap({
                     }}
                     onMouseLeave={hideTooltip}
                     onMouseMove={(event) => {
+                      const svgElement = event.currentTarget.ownerSVGElement;
+                      if (!svgElement) return;
+
+                      const svgRect = svgElement.getBoundingClientRect();
                       const { clientX, clientY } = event;
+
+                      // Calculate position relative to the SVG container
+                      const x = clientX - svgRect.left;
+                      const y = clientY - svgRect.top;
+
                       showTooltip({
                         tooltipData: (
                           <div
@@ -206,8 +219,8 @@ export function StatsMap({
                             )}
                           </div>
                         ),
-                        tooltipLeft: clientX + 10,
-                        tooltipTop: clientY + 10,
+                        tooltipLeft: x + 10,
+                        tooltipTop: y + titleHeight + 10,
                       });
                     }}
                   />
