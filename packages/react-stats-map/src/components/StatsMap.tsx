@@ -10,6 +10,7 @@ import { geoMercator, geoPath, geoAlbersUsa } from '@visx/vendor/d3-geo';
 
 import StatsMapLegend from './StatsMapLegend';
 import StatsMapTitle from './StatsMapTitle';
+import { calculateQuantileThresholds } from '../utils';
 
 export type ThresholdColor = {
   threshold: number;
@@ -93,15 +94,17 @@ export function StatsMap({
   const maxValue = useMemo(() => Math.max(...Object.values(data)), [data]);
 
   // Default thresholds and colors if the user doesn't provide any
+  // Uses quantile-based bucketing to ensure equal distribution of data points across buckets
   const defaultThresholdColors: ThresholdColor[] = useMemo(() => {
-    const stepSize = maxValue / 5;
     const defaultColors = ['#34d399', '#10b981', '#059669', '#047857', '#065f46'];
+    const dataValues = Object.values(data);
+    const quantileThresholds = calculateQuantileThresholds(dataValues, defaultColors.length);
 
-    return Array.from({ length: 5 }, (_, i) => ({
-      threshold: Math.round((i + 1) * stepSize),
+    return quantileThresholds.map((threshold, i) => ({
+      threshold,
       color: defaultColors[i],
     }));
-  }, [maxValue]);
+  }, [data]);
 
   const usedThresholdColors = (thresholdColors || defaultThresholdColors).slice().sort((a, b) => a.threshold - b.threshold);
 

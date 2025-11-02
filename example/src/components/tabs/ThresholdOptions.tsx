@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useMapSettings } from '../../MapSettingsContext';
-import { ThresholdColor } from '@dkkoval/react-stats-map';
+import { ThresholdColor, calculateQuantileThresholds } from '@dkkoval/react-stats-map';
 
 const ThresholdOptions = () => {
   const { data, thresholdColors, setThresholdColors } = useMapSettings();
@@ -9,16 +9,17 @@ const ThresholdOptions = () => {
 
   const defaultThresholdColors: ThresholdColor[] = useMemo(() => {
     if (!thresholdColors) {
-      const stepSize = maxValue / 5;
       const defaultColors = ['#34d399', '#10b981', '#059669', '#047857', '#065f46'];
+      const dataValues = Object.values(data);
+      const quantileThresholds = calculateQuantileThresholds(dataValues, defaultColors.length);
 
-      return Array.from({ length: 5 }, (_, i) => ({
-        threshold: Math.round((i + 1) * stepSize),
+      return quantileThresholds.map((threshold, i) => ({
+        threshold,
         color: defaultColors[i],
       }));
     }
     return thresholdColors;
-  }, [thresholdColors, maxValue]);
+  }, [thresholdColors, data]);
 
   useEffect(() => {
     if (!thresholdColors && setThresholdColors) {
