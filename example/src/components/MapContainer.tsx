@@ -7,9 +7,10 @@ import { PLMapProps } from '@dkkoval/react-pl-stats-map';
 import { EUMapProps } from '@dkkoval/react-eu-stats-map';
 import { FRMapProps } from '@dkkoval/react-fr-stats-map';
 import { WorldMapProps } from '@dkkoval/react-world-stats-map';
+import { USMapProps } from '@dkkoval/react-us-stats-map';
 
 interface MapContainerProps {
-  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps | FRMapProps | WorldMapProps>;
+  mapComponent: React.FC<UAMapProps | MDMapProps | PLMapProps | EUMapProps | FRMapProps | WorldMapProps | USMapProps>;
 }
 
 const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {

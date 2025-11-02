@@ -12,6 +12,7 @@
     "@dkkoval/react-fr-stats-map": "workspace:*",
     "@dkkoval/react-de-stats-map": "workspace:*",
     "@dkkoval/react-world-stats-map": "workspace:*",
+    "@dkkoval/react-us-stats-map": "workspace:*",
     "@emotion/is-prop-valid": "^1.3.1",
     "@monaco-editor/react": "^4.6.0",
     "@testing-library/jest-dom": "^5.17.0",

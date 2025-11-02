@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+When asked to add a country, first look for its GeoJSON (or TopoJSON then convert to GEO).
+Make sure the country map is a recent one and internationally recognized.
+Everything needed about adding a country to the project is in `CONTRIBUTING.md`

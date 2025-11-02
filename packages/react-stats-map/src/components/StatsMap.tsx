@@ -6,7 +6,7 @@ import type { Feature, FeatureCollection } from 'geojson';
 
 import { scaleThreshold } from '@visx/scale';
 import { TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import { geoMercator, geoPath } from '@visx/vendor/d3-geo';
+import { geoMercator, geoPath, geoAlbersUsa } from '@visx/vendor/d3-geo';
 
 import StatsMapLegend from './StatsMapLegend';
 import StatsMapTitle from './StatsMapTitle';
@@ -15,6 +15,8 @@ export type ThresholdColor = {
   threshold: number;
   color: string;
 };
+
+export type ProjectionType = 'mercator' | 'albersUsa';
 
 export interface MapStyle {
   padding?: number;
@@ -35,6 +37,7 @@ export interface StatsMapProps {
   thresholdColors?: ThresholdColor[];
   nameAccessor: (feature: Feature) => string;
   codeAccessor: (feature: Feature) => string;
+  projectionType?: ProjectionType;
 }
 
 export function StatsMap({
@@ -50,6 +53,7 @@ export function StatsMap({
   hideLegend = false,
   mapStyle = {},
   thresholdColors,
+  projectionType = 'mercator',
 }: StatsMapProps) {
   const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } = useTooltip();
 
@@ -64,9 +68,11 @@ export function StatsMap({
   const legendHeight = hideLegend ? 0 : height * 0.1;
   const mapHeight = height - titleHeight - legendHeight;
 
-  // Create a projection for Ukraine using fitExtent
+  // Create a projection based on the projection type
   const projection = useMemo(() => {
-    const proj = geoMercator().fitExtent(
+    const baseProj = projectionType === 'albersUsa' ? geoAlbersUsa() : geoMercator();
+
+    const proj = baseProj.fitExtent(
       [
         [padding, padding],
         [width - padding, mapHeight - padding],
@@ -77,7 +83,7 @@ export function StatsMap({
       }
     );
     return proj;
-  }, [width, mapHeight, padding]); // Added padding to dependencies
+  }, [width, mapHeight, padding, projectionType, topojsonFeatures]);
 
   // Create a path generator using the projection
   const pathGenerator = useMemo(() => geoPath().projection(projection), [

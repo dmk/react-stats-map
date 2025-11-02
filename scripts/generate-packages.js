@@ -34,11 +34,11 @@ function replaceVariables(content, variables) {
 function generateRegionCodesString(codes) {
   // Format as TypeScript union type with proper line breaks
   const quotedCodes = codes.map(code => `'${code}'`);
-  
+
   if (quotedCodes.length <= 10) {
     return `  ${quotedCodes.join(' | ')}`;
   }
-  
+
   // Break into multiple lines for readability
   const lines = [];
   for (let i = 0; i < quotedCodes.length; i += 10) {
@@ -76,20 +76,20 @@ function generateNormalizationChain(normalization) {
 // Process each map configuration
 mapsConfig.forEach((config) => {
   console.log(`📦 Generating package: ${config.packageName}`);
-  
+
   const packageDir = `react-${config.id}-stats-map`;
   const packagePath = path.join(PACKAGES_DIR, packageDir);
-  
+
   // Create package directory structure
   fs.ensureDirSync(path.join(packagePath, 'src', 'assets', 'maps'));
   fs.ensureDirSync(path.join(packagePath, 'docs', 'images'));
-  
+
   // Copy geojson file
   const geojsonSource = path.join(MAPS_DIR, config.geojsonFile);
   const geojsonDest = path.join(packagePath, 'src', 'assets', 'maps', config.geojsonFile);
   fs.copyFileSync(geojsonSource, geojsonDest);
   console.log(`  ✓ Copied ${config.geojsonFile}`);
-  
+
   // Prepare template variables
   const variables = {
     PACKAGE_NAME: config.packageName,
@@ -112,8 +112,9 @@ mapsConfig.forEach((config) => {
     MAPPING_OBJECT: generateMappingObject(config.helperFunction.mapping),
     NORMALIZATION_CHAIN: generateNormalizationChain(config.helperFunction.normalization),
     NAME: config.name,
+    PROJECTION_TYPE_LINE: config.projectionType ? `\n      projectionType="${config.projectionType}"` : '',
   };
-  
+
   // Generate files from templates
   const templates = {
     'Component.tsx.template': `src/${config.componentName}.tsx`,
@@ -125,18 +126,18 @@ mapsConfig.forEach((config) => {
     'tsconfig.json.template': 'tsconfig.json',
     'README.md.template': 'README.md',
   };
-  
+
   Object.entries(templates).forEach(([templateFile, outputFile]) => {
     const templatePath = path.join(TEMPLATES_DIR, templateFile);
     const outputPath = path.join(packagePath, outputFile);
-    
+
     const templateContent = fs.readFileSync(templatePath, 'utf8');
     const generatedContent = replaceVariables(templateContent, variables);
-    
+
     fs.writeFileSync(outputPath, generatedContent);
     console.log(`  ✓ Generated ${outputFile}`);
   });
-  
+
   // Copy LICENSE.txt if it exists from an existing package
   const licenseSource = path.join(PACKAGES_DIR, 'react-ua-stats-map', 'LICENSE.txt');
   const licenseDest = path.join(packagePath, 'LICENSE.txt');
@@ -144,7 +145,7 @@ mapsConfig.forEach((config) => {
     fs.copyFileSync(licenseSource, licenseDest);
     console.log(`  ✓ Copied LICENSE.txt`);
   }
-  
+
   // Copy screenshot if it exists
   const screenshotSource = path.join(PACKAGES_DIR, `react-${config.id}-stats-map`, 'docs', 'images', 'screenshot.png');
   const screenshotDest = path.join(packagePath, 'docs', 'images', 'screenshot.png');
@@ -152,7 +153,7 @@ mapsConfig.forEach((config) => {
     fs.copyFileSync(screenshotSource, screenshotDest);
     console.log(`  ✓ Copied screenshot.png`);
   }
-  
+
   console.log(`  ✅ Package ${config.packageName} generated successfully!\n`);
 });
 
@@ -167,12 +168,12 @@ function getDirHash(dirPath, extension = null) {
   const files = fs.readdirSync(dirPath)
     .filter(f => !extension || f.endsWith(extension))
     .sort();
-  
+
   const combinedContent = files.map(f => {
     const content = fs.readFileSync(path.join(dirPath, f), 'utf8');
     return `${f}:${content}`;
   }).join('\n');
-  
+
   return crypto.createHash('md5').update(combinedContent).digest('hex');
 }
 
