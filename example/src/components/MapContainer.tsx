@@ -27,7 +27,7 @@ const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
   } = useMapSettings();
 
   return (
-    <div className='w-full h-4/5 border rounded-lg flex justify-center items-center bg-white shadow-md'>
+    <div className='absolute inset-0 flex justify-center items-center bg-white overflow-hidden'>
       <ParentSize>
         {({ width, height }) => {
           // Don't render until we have valid dimensions

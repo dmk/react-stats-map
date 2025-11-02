@@ -154,18 +154,28 @@ function App() {
 
   return (
     <>
-      <div className="hidden md:block">
+      <div className="hidden md:block h-screen">
         <MapSettingsProvider {...mapSettings[country].providerProps}>
           <Playground {...{ country, setCountry }} />
         </MapSettingsProvider>
       </div>
-      <div className="block md:hidden text-center p-4">
-        <p className="text-lg font-semibold">
-          For the best experience, please view this application on a larger screen.
-        </p>
-        <p className="text-sm text-gray-600 mt-2">
-          This feature is optimized for larger displays and may not be fully accessible on smaller screens.
-        </p>
+      <div className="block md:hidden min-h-screen bg-gray-100 flex items-center justify-center p-6">
+        <div className="bg-white rounded-lg shadow-lg border border-gray-300 p-8 max-w-md text-center">
+          <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
+            Desktop Required
+          </h2>
+          <p className="text-sm text-gray-600 mb-4">
+            This playground is optimized for larger displays (768px+).
+          </p>
+          <p className="text-xs text-gray-500">
+            Please visit on a tablet or desktop device.
+          </p>
+        </div>
       </div>
     </>
   );

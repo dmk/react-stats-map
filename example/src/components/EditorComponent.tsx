@@ -32,31 +32,42 @@ const EditorComponent = () => {
   };
 
   return (
-    <div className='w-100 border rounded-lg flex flex-col justify-top items-center bg-white shadow-md'>
-      <h3 className='text-lg font-semibold my-2'>Map Data (JSON)</h3>
-      <Editor
-        height="80vh"
-        defaultLanguage="json"
-        onChange={handleJsonChange}
-        value={jsonData}
-        options={{
-          minimap: { enabled: false },
-          lineNumbers: 'off',
-          fontSize: 12,
-          folding: false,
-          overviewRulerBorder: false,
-          scrollBeyondLastLine: false,
-          renderLineHighlight: 'none',
-          guides: {
-            bracketPairs: false,
-            highlightActiveIndentation: false,
-            highlightActiveBracketPair: false,
-            indentation: false
-          },
-          hideCursorInOverviewRuler: true,
-        }}
-        className='h-full'
-      />
+    <div className='h-full flex flex-col overflow-hidden'>
+      <div className='px-4 py-2 bg-gray-50 border-b border-gray-200 flex items-center justify-between flex-shrink-0'>
+        <span className='text-xs text-gray-500'>JSON Editor</span>
+        <span className='text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded font-medium'>
+          Live Preview
+        </span>
+      </div>
+      <div className='flex-1 overflow-hidden'>
+        <Editor
+          height="100%"
+          defaultLanguage="json"
+          onChange={handleJsonChange}
+          value={jsonData}
+          theme="vs-light"
+          options={{
+            minimap: { enabled: false },
+            lineNumbers: 'on',
+            fontSize: 12,
+            folding: true,
+            overviewRulerBorder: false,
+            scrollBeyondLastLine: false,
+            renderLineHighlight: 'all',
+            guides: {
+              bracketPairs: true,
+              highlightActiveIndentation: true,
+              highlightActiveBracketPair: true,
+              indentation: true
+            },
+            hideCursorInOverviewRuler: true,
+            lineNumbersMinChars: 3,
+            padding: { top: 12, bottom: 12 },
+            smoothScrolling: true,
+          }}
+          className='h-full'
+        />
+      </div>
     </div>
   );
 };
