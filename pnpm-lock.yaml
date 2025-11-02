@@ -20,6 +20,9 @@ importers:
 
   example:
     dependencies:
+      '@dkkoval/react-be-stats-map':
+        specifier: workspace:*
+        version: link:../packages/react-be-stats-map
       '@dkkoval/react-de-stats-map':
         specifier: workspace:*
         version: link:../packages/react-de-stats-map
@@ -32,6 +35,9 @@ importers:
       '@dkkoval/react-md-stats-map':
         specifier: workspace:*
         version: link:../packages/react-md-stats-map
+      '@dkkoval/react-nl-stats-map':
+        specifier: workspace:*
+        version: link:../packages/react-nl-stats-map
       '@dkkoval/react-pl-stats-map':
         specifier: workspace:*
         version: link:../packages/react-pl-stats-map
@@ -105,6 +111,55 @@ importers:
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.18
+
+  packages/react-be-stats-map:
+    dependencies:
+      '@dkkoval/react-stats-map':
+        specifier: workspace:*
+        version: link:../react-stats-map
+      react:
+        specifier: ^18
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+      topojson-client:
+        specifier: ^3
+        version: 3.1.0
+    devDependencies:
+      '@emotion/is-prop-valid':
+        specifier: ^1.3.1
+        version: 1.4.0
+      '@rollup/plugin-commonjs':
+        specifier: ^28.0.1
+        version: 28.0.8(rollup@4.52.5)
+      '@rollup/plugin-json':
+        specifier: ^6.1.0
+        version: 6.1.0(rollup@4.52.5)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.3.0
+        version: 15.3.1(rollup@4.52.5)
+      '@types/react':
+        specifier: ^18.3.12
+        version: 18.3.26
+      '@types/react-dom':
+        specifier: ^18.3.1
+        version: 18.3.7(@types/react@18.3.26)
+      rollup:
+        specifier: ^4.24.2
+        version: 4.52.5
+      rollup-plugin-copy:
+        specifier: ^3.5.0
+        version: 3.5.0
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@4.52.5)
+      rollup-plugin-typescript2:
+        specifier: ^0.36.0
+        version: 0.36.0(rollup@4.52.5)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
 
   packages/react-de-stats-map:
     dependencies:
@@ -254,6 +309,55 @@ importers:
         version: 5.9.3
 
   packages/react-md-stats-map:
+    dependencies:
+      '@dkkoval/react-stats-map':
+        specifier: workspace:*
+        version: link:../react-stats-map
+      react:
+        specifier: ^18
+        version: 18.3.1
+      react-dom:
+        specifier: ^18
+        version: 18.3.1(react@18.3.1)
+      topojson-client:
+        specifier: ^3
+        version: 3.1.0
+    devDependencies:
+      '@emotion/is-prop-valid':
+        specifier: ^1.3.1
+        version: 1.4.0
+      '@rollup/plugin-commonjs':
+        specifier: ^28.0.1
+        version: 28.0.8(rollup@4.52.5)
+      '@rollup/plugin-json':
+        specifier: ^6.1.0
+        version: 6.1.0(rollup@4.52.5)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.3.0
+        version: 15.3.1(rollup@4.52.5)
+      '@types/react':
+        specifier: ^18.3.12
+        version: 18.3.26
+      '@types/react-dom':
+        specifier: ^18.3.1
+        version: 18.3.7(@types/react@18.3.26)
+      rollup:
+        specifier: ^4.24.2
+        version: 4.52.5
+      rollup-plugin-copy:
+        specifier: ^3.5.0
+        version: 3.5.0
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@4.52.5)
+      rollup-plugin-typescript2:
+        specifier: ^0.36.0
+        version: 0.36.0(rollup@4.52.5)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
+  packages/react-nl-stats-map:
     dependencies:
       '@dkkoval/react-stats-map':
         specifier: workspace:*

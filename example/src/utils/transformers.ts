@@ -6,6 +6,8 @@ import { getRegionCode, RegionCode } from "@dkkoval/react-fr-stats-map";
 import { getCountryCode as getWorldCountryCode, CountryCode as WorldCountryCode } from "@dkkoval/react-world-stats-map";
 import { getStateCode as getDEStateCode, StateCode as DEStateCode } from "@dkkoval/react-de-stats-map";
 import { getStateCode as getUSStateCode, StateCode as USStateCode } from "@dkkoval/react-us-stats-map";
+import { getProvinceCode as getBEProvinceCode, ProvinceCode as BEProvinceCode } from "@dkkoval/react-be-stats-map";
+import { getProvinceCode as getNLProvinceCode, ProvinceCode as NLProvinceCode } from "@dkkoval/react-nl-stats-map";
 
 export function transformUADataKeys(data: Record<string, number>): Record<OblastCode, number> {
   const transformedData: Partial<Record<OblastCode, number>> = {};
@@ -109,4 +111,30 @@ export function transformUSDataKeys(data: Record<string, number>): Record<USStat
   });
 
   return transformedData as Record<USStateCode, number>;
+}
+
+export function transformBEDataKeys(data: Record<string, number>): Record<BEProvinceCode, number> {
+  const transformedData: Partial<Record<BEProvinceCode, number>> = {};
+
+  Object.entries(data).forEach(([key, value]) => {
+    const code = getBEProvinceCode(key);
+    if (code) {
+      transformedData[code] = value;
+    }
+  });
+
+  return transformedData as Record<BEProvinceCode, number>;
+}
+
+export function transformNLDataKeys(data: Record<string, number>): Record<NLProvinceCode, number> {
+  const transformedData: Partial<Record<NLProvinceCode, number>> = {};
+
+  Object.entries(data).forEach(([key, value]) => {
+    const code = getNLProvinceCode(key);
+    if (code) {
+      transformedData[code] = value;
+    }
+  });
+
+  return transformedData as Record<NLProvinceCode, number>;
 }

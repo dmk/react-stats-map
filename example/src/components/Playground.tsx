@@ -40,6 +40,8 @@ function Playground({ country, setCountry }: PlaygroundProps) {
           <option value="Europe">Europe</option>
           <option value="France">France</option>
           <option value="Germany">Germany</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Netherlands">Netherlands</option>
           <option value="World">World</option>
           <option value="United States">United States</option>
         </select>

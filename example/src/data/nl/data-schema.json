@@ -1,0 +1,19 @@
+{
+  "name": "Netherlands Population Data",
+  "description": "Population data for Dutch provinces",
+  "regions": [
+    { "code": "NLDR", "name": "Drenthe" },
+    { "code": "NLFL", "name": "Flevoland" },
+    { "code": "NLFR", "name": "Friesland" },
+    { "code": "NLGE", "name": "Gelderland" },
+    { "code": "NLGR", "name": "Groningen" },
+    { "code": "NLLI", "name": "Limburg" },
+    { "code": "NLNB", "name": "Noord-Brabant" },
+    { "code": "NLNH", "name": "Noord-Holland" },
+    { "code": "NLOV", "name": "Overijssel" },
+    { "code": "NLUT", "name": "Utrecht" },
+    { "code": "NLZE", "name": "Zeeland" },
+    { "code": "NLZH", "name": "Zuid-Holland" }
+  ]
+}
+

@@ -1,5 +1,80 @@
 [
   {
+    "id": "be",
+    "name": "Belgium",
+    "packageName": "@dkkoval/react-be-stats-map",
+    "componentName": "BEMap",
+    "propsName": "BEMapProps",
+    "geojsonFile": "be-adm1.json",
+    "topojsonObject": "belgium",
+    "regionType": "Province",
+    "regionCodeType": "ProvinceCode",
+    "regionCodes": [
+      "BEBRU", "BEVAN", "BEVBR", "BEVLI", "BEVOV", "BEVWV", "BEWBR", "BEWHT", "BEWLG", "BEWLX", "BEWNA"
+    ],
+    "accessors": {
+      "name": "properties?.name",
+      "code": "properties?.id"
+    },
+    "helperFunction": {
+      "name": "getProvinceCode",
+      "mapping": {
+        "BEBRU": ["brussels", "bruxelles", "brussel"],
+        "BEVAN": ["antwerp", "antwerpen", "anvers"],
+        "BEVBR": ["flemish brabant", "vlaams-brabant", "brabant flamand"],
+        "BEVLI": ["limburg"],
+        "BEVOV": ["east flanders", "oost-vlaanderen", "flandre orientale"],
+        "BEVWV": ["west flanders", "west-vlaanderen", "flandre occidentale"],
+        "BEWBR": ["walloon brabant", "waals-brabant", "brabant wallon"],
+        "BEWHT": ["hainaut", "henegouwen"],
+        "BEWLG": ["liege", "liège", "luik"],
+        "BEWLX": ["luxembourg", "luxemburg"],
+        "BEWNA": ["namur", "namen"]
+      },
+      "normalization": "toLowerCase().replace(/[.,]/g, '').replace(/\\s*(province|provincie)\\s*/g, '').trim()"
+    },
+    "description": "A React component for visualizing data on a map of Belgium by province.",
+    "keywords": ["react", "typescript", "map", "belgium", "d3", "visx", "data-visualisation"]
+  },
+  {
+    "id": "nl",
+    "name": "Netherlands",
+    "packageName": "@dkkoval/react-nl-stats-map",
+    "componentName": "NLMap",
+    "propsName": "NLMapProps",
+    "geojsonFile": "nl-adm1.json",
+    "topojsonObject": "netherlands",
+    "regionType": "Province",
+    "regionCodeType": "ProvinceCode",
+    "regionCodes": [
+      "NLDR", "NLFL", "NLFR", "NLGE", "NLGR", "NLLI", "NLNB", "NLNH", "NLOV", "NLUT", "NLZE", "NLZH"
+    ],
+    "accessors": {
+      "name": "properties?.name",
+      "code": "properties?.id"
+    },
+    "helperFunction": {
+      "name": "getProvinceCode",
+      "mapping": {
+        "NLDR": ["drenthe"],
+        "NLFL": ["flevoland"],
+        "NLFR": ["friesland", "fryslân"],
+        "NLGE": ["gelderland"],
+        "NLGR": ["groningen"],
+        "NLLI": ["limburg"],
+        "NLNB": ["noord-brabant", "north brabant", "brabant"],
+        "NLNH": ["noord-holland", "north holland"],
+        "NLOV": ["overijssel"],
+        "NLUT": ["utrecht"],
+        "NLZE": ["zeeland"],
+        "NLZH": ["zuid-holland", "south holland"]
+      },
+      "normalization": "toLowerCase().replace(/[.,]/g, '').replace(/\\s*(provincie|province)\\s*/g, '').trim()"
+    },
+    "description": "A React component for visualizing data on a map of the Netherlands by province.",
+    "keywords": ["react", "typescript", "map", "netherlands", "d3", "visx", "data-visualisation"]
+  },
+  {
     "id": "ua",
     "name": "Ukraine",
     "packageName": "@dkkoval/react-ua-stats-map",
