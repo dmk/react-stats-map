@@ -68,8 +68,10 @@ export const MapSettingsProvider = ({
   const [defaultFillColor, setDefaultFillColor] = useState('#cbd5e1');
   const [hoverStyle, setHoverStyle] = useState<HoverStyle>({
     enabled: true,
-    strokeWidth: 2,
-    scale: 1.01,
+    styles: {
+      strokeWidth: 2,
+      transform: 'scale(1.01)',
+    },
     transitionDuration: 200,
     transitionTiming: 'ease',
   });

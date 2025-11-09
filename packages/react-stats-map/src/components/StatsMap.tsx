@@ -20,14 +20,16 @@ export type ProjectionType = 'mercator' | 'albersUsa';
 export interface HoverStyle {
   /** Whether to enable hover effects (default: true) */
   enabled?: boolean;
-  /** Stroke width on hover (default: 2) */
-  strokeWidth?: number;
-  /** Scale transformation on hover (default: 1.01) */
-  scale?: number;
+  /** CSS styles to apply on hover */
+  styles?: React.CSSProperties;
+  /** CSS styles to reset to on mouse leave (optional, defaults to clearing hover styles) */
+  resetStyles?: React.CSSProperties;
   /** Transition duration in milliseconds (default: 200) */
   transitionDuration?: number;
   /** Transition timing function (default: 'ease') */
   transitionTiming?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+  /** CSS properties to transition (default: 'all') */
+  transitionProperties?: string;
 }
 
 export interface MapStyle {
@@ -80,10 +82,14 @@ export function StatsMap({
   // Destructure hover style with defaults
   const {
     enabled: hoverEnabled = true,
-    strokeWidth: hoverStrokeWidth = 2,
-    scale: hoverScale = 1.01,
+    styles: hoverStyles = {
+      strokeWidth: 2,
+      transform: 'scale(1.01)',
+    },
+    resetStyles: hoverResetStyles,
     transitionDuration = 200,
     transitionTiming = 'ease',
+    transitionProperties = 'all',
   } = hoverStyle;
 
   // Adjust heights based on whether Title and Legend are hidden
@@ -195,7 +201,7 @@ export function StatsMap({
                     strokeWidth={1}
                     style={{
                       transition: hoverEnabled
-                        ? `stroke-width ${transitionDuration}ms ${transitionTiming}, transform ${transitionDuration}ms ${transitionTiming}`
+                        ? `${transitionProperties} ${transitionDuration}ms ${transitionTiming}`
                         : 'none',
                       transformBox: 'fill-box',
                       transformOrigin: 'center center',
@@ -211,18 +217,24 @@ export function StatsMap({
                       if (hoverEnabled) {
                         void element.getBoundingClientRect();
 
-                        // Now apply hover styles - CSS transitions will animate
-                        element.style.strokeWidth = `${hoverStrokeWidth}`;
-                        element.style.transform = `scale(${hoverScale})`;
+                        // Apply hover styles - CSS transitions will animate
+                        Object.assign(element.style, hoverStyles);
                       }
                     }}
                     onMouseLeave={(event) => {
                       const element = event.target as SVGPathElement;
 
-                      // Reset styles immediately - CSS transitions handle the animation
+                      // Reset styles - CSS transitions handle the animation
                       if (hoverEnabled) {
-                        element.style.strokeWidth = '1';
-                        element.style.transform = 'scale(1)';
+                        if (hoverResetStyles) {
+                          // Use explicit reset styles if provided
+                          Object.assign(element.style, hoverResetStyles);
+                        } else {
+                          // Clear hover styles by setting them to empty strings
+                          Object.keys(hoverStyles).forEach(key => {
+                            (element.style as any)[key] = '';
+                          });
+                        }
                       }
                       hideTooltip();
                     }}

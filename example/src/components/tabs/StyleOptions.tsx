@@ -21,6 +21,11 @@ const StyleOptions = () => {
     { value: 'ease-in-out', label: 'Ease In-Out' },
   ];
 
+  // Extract current values from hoverStyle.styles
+  const currentStrokeWidth = (hoverStyle.styles?.strokeWidth as number) || 2;
+  const currentTransform = (hoverStyle.styles?.transform as string) || 'scale(1.01)';
+  const currentScale = parseFloat(currentTransform.match(/scale\(([\d.]+)\)/)?.[1] || '1.01');
+
   return (
     <div className='space-y-6'>
       {/* Map Style Section */}
@@ -99,12 +104,18 @@ const StyleOptions = () => {
                 min="1"
                 max="5"
                 step="0.5"
-                value={hoverStyle.strokeWidth}
-                onChange={(e) => setHoverStyle({ ...hoverStyle, strokeWidth: Number(e.target.value) })}
+                value={currentStrokeWidth}
+                onChange={(e) => setHoverStyle({
+                  ...hoverStyle,
+                  styles: {
+                    ...hoverStyle.styles,
+                    strokeWidth: Number(e.target.value)
+                  }
+                })}
                 disabled={!hoverStyle.enabled}
                 className='flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 disabled:opacity-50 disabled:cursor-not-allowed'
               />
-              <span className='text-xs font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded min-w-[40px] text-center'>{hoverStyle.strokeWidth}</span>
+              <span className='text-xs font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded min-w-[40px] text-center'>{currentStrokeWidth}</span>
             </div>
           </div>
 
@@ -117,12 +128,18 @@ const StyleOptions = () => {
                 min="1"
                 max="1.1"
                 step="0.01"
-                value={hoverStyle.scale}
-                onChange={(e) => setHoverStyle({ ...hoverStyle, scale: Number(e.target.value) })}
+                value={currentScale}
+                onChange={(e) => setHoverStyle({
+                  ...hoverStyle,
+                  styles: {
+                    ...hoverStyle.styles,
+                    transform: `scale(${e.target.value})`
+                  }
+                })}
                 disabled={!hoverStyle.enabled}
                 className='flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 disabled:opacity-50 disabled:cursor-not-allowed'
               />
-              <span className='text-xs font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded min-w-[40px] text-center'>{hoverStyle.scale?.toFixed(2)}</span>
+              <span className='text-xs font-medium text-gray-700 bg-gray-100 px-2 py-1 rounded min-w-[40px] text-center'>{currentScale.toFixed(2)}</span>
             </div>
           </div>
 
