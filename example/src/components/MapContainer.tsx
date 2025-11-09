@@ -22,6 +22,7 @@ const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
     hideLegend,
     borderColor,
     defaultFillColor,
+    hoverStyle,
     thresholdColors,
     data,
   } = useMapSettings();
@@ -45,6 +46,7 @@ const MapContainer = ({ mapComponent: MapComponent }: MapContainerProps) => {
                 padding,
                 borderColor,
                 defaultFillColor,
+                hoverStyle,
               }}
               hideTitle={hideTitle}
               hideLegend={hideLegend}

@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { motion } from 'framer-motion';
-
 import type { Feature, FeatureCollection } from 'geojson';
 
 import { scaleThreshold } from '@visx/scale';
@@ -19,10 +17,24 @@ export type ThresholdColor = {
 
 export type ProjectionType = 'mercator' | 'albersUsa';
 
+export interface HoverStyle {
+  /** Whether to enable hover effects (default: true) */
+  enabled?: boolean;
+  /** Stroke width on hover (default: 2) */
+  strokeWidth?: number;
+  /** Scale transformation on hover (default: 1.01) */
+  scale?: number;
+  /** Transition duration in milliseconds (default: 200) */
+  transitionDuration?: number;
+  /** Transition timing function (default: 'ease') */
+  transitionTiming?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
+}
+
 export interface MapStyle {
   padding?: number;
   borderColor?: string;
   defaultFillColor?: string;
+  hoverStyle?: HoverStyle;
 }
 
 export interface StatsMapProps {
@@ -62,7 +74,17 @@ export function StatsMap({
     padding = 10,
     borderColor = '#ebf4f3',
     defaultFillColor = '#cbd5e1',
+    hoverStyle = {},
   } = mapStyle;
+
+  // Destructure hover style with defaults
+  const {
+    enabled: hoverEnabled = true,
+    strokeWidth: hoverStrokeWidth = 2,
+    scale: hoverScale = 1.01,
+    transitionDuration = 200,
+    transitionTiming = 'ease',
+  } = hoverStyle;
 
   // Adjust heights based on whether Title and Legend are hidden
   const titleHeight = hideTitle ? 0 : height * 0.1;
@@ -166,20 +188,44 @@ export function StatsMap({
 
               return (
                 <React.Fragment key={`map-feature-${i}`}>
-                  <motion.path
+                  <path
                     d={paths[i] || ''}
                     fill={colorScale(value) || defaultFillColor}
                     stroke={borderColor}
                     strokeWidth={1}
-                    whileHover={{
-                      strokeWidth: 2,
-                      scale: 1.01,
+                    style={{
+                      transition: hoverEnabled
+                        ? `stroke-width ${transitionDuration}ms ${transitionTiming}, transform ${transitionDuration}ms ${transitionTiming}`
+                        : 'none',
+                      transformBox: 'fill-box',
+                      transformOrigin: 'center center',
+                      cursor: 'pointer',
                     }}
                     onMouseEnter={(event) => {
                       const element = event.target as SVGPathElement;
+
+                      // Bring the hovered region to the front first
                       (element.parentNode as Node).appendChild(element);
+
+                      // Force a style recalculation so browser sees default state after DOM change
+                      if (hoverEnabled) {
+                        void element.getBoundingClientRect();
+
+                        // Now apply hover styles - CSS transitions will animate
+                        element.style.strokeWidth = `${hoverStrokeWidth}`;
+                        element.style.transform = `scale(${hoverScale})`;
+                      }
                     }}
-                    onMouseLeave={hideTooltip}
+                    onMouseLeave={(event) => {
+                      const element = event.target as SVGPathElement;
+
+                      // Reset styles immediately - CSS transitions handle the animation
+                      if (hoverEnabled) {
+                        element.style.strokeWidth = '1';
+                        element.style.transform = 'scale(1)';
+                      }
+                      hideTooltip();
+                    }}
                     onMouseMove={(event) => {
                       const svgElement = event.currentTarget.ownerSVGElement;
                       if (!svgElement) return;

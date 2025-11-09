@@ -42,7 +42,6 @@
     "@visx/tooltip": "^3",
     "@visx/vendor": "^3",
     "d3-scale": "^4",
-    "framer-motion": "^11",
     "topojson-client": "^3"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { OblastCode } from '@dkkoval/react-ua-stats-map';
-import { ThresholdColor } from '@dkkoval/react-stats-map';
+import { ThresholdColor, HoverStyle } from '@dkkoval/react-stats-map';
 import { RaionCode } from '@dkkoval/react-md-stats-map';
 
 type RegionCode = OblastCode | RaionCode;
@@ -13,6 +13,7 @@ export interface MapSettings {
   hideLegend: boolean;
   borderColor: string;
   defaultFillColor: string;
+  hoverStyle: HoverStyle;
   data: Record<RegionCode, number>;
   jsonData: string;
   thresholdColors?: ThresholdColor[];
@@ -25,6 +26,7 @@ export interface MapSettings {
   setHideLegend: (hideLegend: boolean) => void;
   setBorderColor: (color: string) => void;
   setDefaultFillColor: (color: string) => void;
+  setHoverStyle: (hoverStyle: HoverStyle) => void;
   setData: (data: Record<RegionCode, number>) => void;
   setJsonData: (jsonData: string) => void;
   setThresholdColors?: (thresholdColors: ThresholdColor[]) => void;
@@ -64,6 +66,13 @@ export const MapSettingsProvider = ({
   const [hideLegend, setHideLegend] = useState(false);
   const [borderColor, setBorderColor] = useState('#EBF4F3');
   const [defaultFillColor, setDefaultFillColor] = useState('#cbd5e1');
+  const [hoverStyle, setHoverStyle] = useState<HoverStyle>({
+    enabled: true,
+    strokeWidth: 2,
+    scale: 1.01,
+    transitionDuration: 200,
+    transitionTiming: 'ease',
+  });
   const [data, setData] = useState(dataKeysTransformer(initialData));
   const [jsonData, setJsonData] = useState(JSON.stringify(initialData, null, 2));
   const [thresholdColors, setThresholdColors] = useState<ThresholdColor[] | undefined>(undefined);
@@ -78,6 +87,7 @@ export const MapSettingsProvider = ({
         hideLegend,
         borderColor,
         defaultFillColor,
+        hoverStyle,
         data,
         jsonData,
         thresholdColors,
@@ -90,6 +100,7 @@ export const MapSettingsProvider = ({
         setHideLegend,
         setBorderColor,
         setDefaultFillColor,
+        setHoverStyle,
         setData,
         setJsonData,
         setThresholdColors,
