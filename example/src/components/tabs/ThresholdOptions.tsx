@@ -6,8 +6,6 @@ const ThresholdOptions = () => {
   const { data, thresholdColors, setThresholdColors } = useMapSettings();
   const dataValuesRef = useRef<string>('');
 
-  const maxValue = useMemo(() => Math.max(...Object.values(data)), [data]);
-
   // Calculate default thresholds based on current data
   // For N buckets, we need N-1 thresholds (boundaries between buckets)
   const calculateDefaultThresholds = useMemo(() => {

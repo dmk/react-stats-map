@@ -80,16 +80,6 @@ const DataEditor = () => {
     }
   };
 
-  const handleBulkUpdate = (multiplier: number) => {
-    const updatedData = Object.fromEntries(
-      Object.entries(data).map(([code, value]) => [
-        code,
-        value * multiplier,
-      ])
-    );
-    setData(updatedData as typeof data);
-  };
-
   return (
     <div className='h-full flex flex-col overflow-hidden'>
       {/* Header */}
